@@ -3,7 +3,6 @@ import {
   Sparkles,
   Image,
   Gamepad2,
-  LogIn,
   Presentation,
   Briefcase,
   ChevronDown,
@@ -12,14 +11,13 @@ import {
 } from 'lucide-react';
 import { Lang, t } from '../i18n';
 
-export type Page = 'gemini' | 'image' | 'app' | 'presentation' | 'login' | 'qwen';
+export type Page = 'gemini' | 'image' | 'app' | 'presentation' | 'qwen';
 
 const geminiItems: { id: Exclude<Page, 'qwen'>; icon: typeof Sparkles; labelKey: string }[] = [
   { id: 'gemini', icon: Sparkles, labelKey: 'geminiGem' },
   { id: 'image', icon: Image, labelKey: 'imageGen' },
   { id: 'app', icon: Gamepad2, labelKey: 'appGame' },
   { id: 'presentation', icon: Presentation, labelKey: 'pptTab' },
-  { id: 'login', icon: LogIn, labelKey: 'login' },
 ];
 
 interface NavProps {
