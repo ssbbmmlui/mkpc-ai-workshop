@@ -38,8 +38,8 @@ function App() {
   return (
     <div className="app-shell min-h-screen">
       <header className="sticky top-0 z-40 h-20 border-b border-white/60 bg-white/70 backdrop-blur-xl">
-        <div className="flex h-full items-center justify-between gap-3 px-4 md:px-6">
-          <div className="flex min-w-0 items-center gap-3">
+        <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 md:px-6">
+          <div className="flex min-w-0 items-center gap-2 justify-self-start">
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -48,11 +48,12 @@ function App() {
             >
               <Menu size={20} />
             </button>
-            <img src={assetUrl('MKPC-Logo.png')} alt="MKPC Logo" className="h-12 w-auto shrink-0" />
-            <SiteTitle lang={lang} />
+            <img src={assetUrl('MKPC-Logo.png')} alt="MKPC Logo" className="h-9 w-auto shrink-0 md:h-12" />
           </div>
 
-          <div className="flex shrink-0 items-center gap-1 rounded-full bg-white/80 p-1 shadow-sm ring-1 ring-slate-200/70">
+          <SiteTitle lang={lang} />
+
+          <div className="flex shrink-0 items-center gap-1 justify-self-end rounded-full bg-white/80 p-1 shadow-sm ring-1 ring-slate-200/70">
             <Languages size={16} className="ml-2 hidden text-slate-400 sm:block" />
             <button
               onClick={() => setLang(lang === 'tc' ? 'sc' : 'tc')}
