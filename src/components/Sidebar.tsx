@@ -8,25 +8,39 @@ import {
   ChevronDown,
   ChevronRight,
   Globe,
+  FileText,
   X,
 } from 'lucide-react';
 import { Lang, t } from '../i18n';
 
-export type Page = 'gemini' | 'geminiGem' | 'image' | 'app' | 'presentation' | 'qwen' | 'qwenWeb';
+export type Page =
+  | 'gemini'
+  | 'geminiGem'
+  | 'image'
+  | 'app'
+  | 'presentation'
+  | 'qwen'
+  | 'qwenWeb'
+  | 'qwenWorksheets';
 
-const geminiItems: { id: Exclude<Page, 'gemini' | 'qwen' | 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
+const geminiItems: {
+  id: Exclude<Page, 'gemini' | 'qwen' | 'qwenWeb' | 'qwenWorksheets'>;
+  icon: typeof Sparkles;
+  labelKey: string;
+}[] = [
   { id: 'geminiGem', icon: Sparkles, labelKey: 'geminiGem' },
   { id: 'image', icon: Image, labelKey: 'imageGen' },
   { id: 'app', icon: Gamepad2, labelKey: 'appGame' },
   { id: 'presentation', icon: Presentation, labelKey: 'pptTab' },
 ];
 
-const qwenItems: { id: Extract<Page, 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
+const qwenItems: { id: Extract<Page, 'qwenWeb' | 'qwenWorksheets'>; icon: typeof Sparkles; labelKey: string }[] = [
   { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
+  { id: 'qwenWorksheets', icon: FileText, labelKey: 'qwenWorksheets' },
 ];
 
 const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'app', 'presentation'];
-const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb'];
+const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb', 'qwenWorksheets'];
 
 interface NavProps {
   lang: Lang;
@@ -149,7 +163,7 @@ function SidebarNav({
                 type="button"
                 onClick={() => onSelect(id)}
                 aria-current={activePage === id ? 'page' : undefined}
-                className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition ${itemClass(activePage === id, 'violet')}`}
+                className={`flex items-start gap-2 rounded-xl px-3 py-2 text-left text-sm leading-snug transition ${itemClass(activePage === id, 'violet')}`}
               >
                 <Icon size={16} className="shrink-0" />
                 {t(labelKey, lang)}
