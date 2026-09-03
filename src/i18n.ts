@@ -1,7 +1,7 @@
 export type Lang = 'tc' | 'sc' | 'en';
 
 const translations: Record<string, { tc: string; sc: string; en: string }> = {
-  title: { tc: '萬鈞伯裘書院AI工作坊', sc: '万钧伯裘书院AI工作坊', en: 'MKPC AI Workshop' },
+  title: { tc: 'AI工作坊', sc: 'AI工作坊', en: 'AI Workshop' },
   geminiGroup: { tc: 'Gemini', sc: 'Gemini', en: 'Gemini' },
   geminiEyebrow: { tc: 'Google 生成式 AI 助理', sc: 'Google 生成式 AI 助理', en: 'Google generative AI assistant' },
   geminiHeadline: { tc: 'Gemini', sc: 'Gemini', en: 'Gemini' },

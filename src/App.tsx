@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Languages, Menu } from 'lucide-react';
 import { GeminiHomeTab } from './components/GeminiHomeTab';
 import { GeminiTab } from './components/GeminiTab';
@@ -8,6 +8,7 @@ import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { QwenWebTab } from './components/QwenWebTab';
 import { QwenWorksheetsTab } from './components/QwenWorksheetsTab';
+import { SiteTitle } from './components/SiteTitle';
 import { Page, Sidebar } from './components/Sidebar';
 import { Lang, t } from './i18n';
 import { assetUrl } from './assetUrl';
@@ -18,6 +19,11 @@ function App() {
   const [geminiOpen, setGeminiOpen] = useState(true);
   const [qwenOpen, setQwenOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = t('title', lang);
+    document.documentElement.lang = lang === 'en' ? 'en' : lang === 'sc' ? 'zh-Hans' : 'zh-Hant';
+  }, [lang]);
 
   const handleSelect = (page: Page) => {
     setActivePage(page);
@@ -43,9 +49,7 @@ function App() {
               <Menu size={20} />
             </button>
             <img src={assetUrl('MKPC-Logo.png')} alt="MKPC Logo" className="h-12 w-auto shrink-0" />
-            <h1 className="truncate text-lg font-bold tracking-tight text-slate-800 md:text-2xl">
-              {t('title', lang)}
-            </h1>
+            <SiteTitle lang={lang} />
           </div>
 
           <div className="flex shrink-0 items-center gap-1 rounded-full bg-white/80 p-1 shadow-sm ring-1 ring-slate-200/70">
