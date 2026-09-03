@@ -75,7 +75,7 @@ export function AppGameTab({ lang }: Props) {
             <iframe
               src={assetUrl('apps/titration.html')}
               title="Acid-Base Titration Simulator"
-              className="h-[800px] w-full border-0"
+              className="h-[1400px] w-full border-0"
             />
           </div>
         </div>
