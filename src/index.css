@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0284c7;
+}
+
+* {
+  font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800;
+}
+
+.copy-btn {
+  @apply relative overflow-hidden transition-all duration-200;
+}
+
+.copy-btn::after {
+  content: '';
+  @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-200;
+}
+
+.copy-btn:active::after {
+  @apply opacity-100;
+}
+
+.tab-active {
+  @apply border-b-2 border-sky-500 text-sky-600 font-semibold;
+}
+
+.tab-inactive {
+  @apply border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300;
+}
+
+.step-card {
+  @apply bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow duration-200;
+}
+
+.prompt-block {
+  @apply bg-slate-900 text-slate-100 rounded-xl p-5 font-mono text-sm leading-relaxed relative;
+}
+
+.section-title {
+  @apply text-xl font-bold text-slate-800 mb-4 flex items-center gap-2;
+}
+
+@keyframes copied {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-copied {
+  animation: copied 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease-out;
+}

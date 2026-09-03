@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Math Snake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        canvas {
+            display: block;
+            background: #1a1a2e;
+            border-radius: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .flash-correct {
+            animation: flashGreen 0.4s;
+        }
+
+        .flash-wrong {
+            animation: flashRed 0.4s;
+        }
+
+        @keyframes flashGreen {
+            0% { background-color: rgba(16, 185, 129, 0.3); }
+            100% { background-color: transparent; }
+        }
+
+        @keyframes flashRed {
+            0% { background-color: rgba(239, 68, 68, 0.3); }
+            100% { background-color: transparent; }
+        }
+
+        .difficulty-btn {
+            transition: all 0.2s ease;
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .difficulty-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Cover Page / Main Menu -->
+    <div id="coverPage" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6"
+        style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
+
+        <!-- Floating particles background -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-[10%] left-[15%] w-3 h-3 bg-indigo-400/30 rounded-full float-anim"></div>
+            <div class="absolute top-[30%] right-[20%] w-2 h-2 bg-cyan-400/40 rounded-full float-anim" style="animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-[20%] left-[25%] w-4 h-4 bg-emerald-400/20 rounded-full float-anim" style="animation-delay: 1s;"></div>
+            <div class="absolute top-[60%] right-[10%] w-2 h-2 bg-amber-400/30 rounded-full float-anim" style="animation-delay: 1.5s;"></div>
+            <div class="absolute bottom-[40%] left-[8%] w-3 h-3 bg-rose-400/20 rounded-full float-anim" style="animation-delay: 0.8s;"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-lg w-full">
+            <!-- Logo / Title -->
+            <div class="mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 mb-4 pulse-glow">
+                    <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-indigo-300 mb-3">
+                    Math Snake
+                </h1>
+                <p class="text-lg text-gray-400 font-medium">Master Negative Numbers with Fun</p>
+            </div>
+
+            <!-- Difficulty Selection -->
+            <div id="difficultySelection" class="space-y-3 animate-slide-up">
+                <p class="text-sm text-gray-500 uppercase tracking-wider font-semibold mb-4">Select Difficulty</p>
+
+                <button id="easyBtn" class="difficulty-btn w-full bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 border border-emerald-500/40 hover:border-emerald-400 text-white px-6 py-4 rounded-xl font-bold text-left flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center flex-shrink-0">
+                        <span class="text-xl">1</span>
+                    </div>
+                    <div>
+                        <div class="text-base font-bold text-emerald-300">Easy</div>
+                        <div class="text-sm text-gray-400">Addition & Subtraction</div>
+                    </div>
+                </button>
+
+                <button id="mediumBtn" class="difficulty-btn w-full bg-gradient-to-r from-amber-500/20 to-orange-600/20 border border-amber-500/40 hover:border-amber-400 text-white px-6 py-4 rounded-xl font-bold text-left flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center flex-shrink-0">
+                        <span class="text-xl">2</span>
+                    </div>
+                    <div>
+                        <div class="text-base font-bold text-amber-300">Medium</div>
+                        <div class="text-sm text-gray-400">+, -, x Operations</div>
+                    </div>
+                </button>
+
+                <button id="hardBtn" class="difficulty-btn w-full bg-gradient-to-r from-rose-500/20 to-red-600/20 border border-rose-500/40 hover:border-rose-400 text-white px-6 py-4 rounded-xl font-bold text-left flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-red-600 flex items-center justify-center flex-shrink-0">
+                        <span class="text-xl">3</span>
+                    </div>
+                    <div>
+                        <div class="text-base font-bold text-rose-300">Hard</div>
+                        <div class="text-sm text-gray-400">Multi-step Problems</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Start / Instructions (shown after difficulty pick) -->
+            <div id="gameControls" class="hidden space-y-3 animate-slide-up">
+                <div id="selectedDiffBadge" class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4"></div>
+                <button id="startGameBtn" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-emerald-500/25 transition-all">
+                    Start Game
+                </button>
+                <button id="instructionsBtn" class="w-full bg-white/5 border border-white/10 hover:border-white/30 text-gray-300 hover:text-white px-8 py-3 rounded-xl font-semibold transition-all">
+                    How to Play
+                </button>
+                <button id="backBtn" class="w-full text-gray-500 hover:text-gray-300 py-2 font-medium transition-colors text-sm">
+                    &larr; Change Difficulty
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-2xl max-w-md w-full animate-fade-in max-h-[90vh] overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4 text-cyan-300">How to Play</h2>
+            <div class="space-y-4 text-sm text-gray-300">
+                <div>
+                    <h3 class="font-semibold text-white mb-1">Controls</h3>
+                    <ul class="space-y-1">
+                        <li>Desktop: Use WASD keys to move</li>
+                        <li>Mobile/Tablet: Swipe to move</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-1">Gameplay</h3>
+                    <ul class="space-y-1">
+                        <li>Eat the bubble with the correct answer</li>
+                        <li>Correct answers grow the snake and earn points</li>
+                        <li>Wrong answers grow the snake by 1 and deduct points</li>
+                        <li>Longer streaks earn bigger bonus points</li>
+                        <li>Eat "P" items for wall penetration (3 moves)</li>
+                        <li>Don't hit walls or yourself!</li>
+                    </ul>
+                </div>
+            </div>
+            <button id="closeModal" class="mt-6 w-full bg-cyan-500 hover:bg-cyan-400 text-white py-2.5 rounded-xl font-semibold transition-colors">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-gray-800 border border-gray-700 p-8 rounded-2xl shadow-2xl max-w-sm w-full animate-fade-in text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-rose-500/20 flex items-center justify-center">
+                <svg class="w-8 h-8 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-1">Game Over</h2>
+            <p id="gameOverReason" class="text-gray-400 mb-4 text-sm"></p>
+            <div class="bg-gray-900/60 rounded-xl p-4 mb-6">
+                <div class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400" id="gameOverScore">0</div>
+                <div class="text-xs text-gray-500 mt-1">FINAL SCORE</div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 mb-6 text-center">
+                <div>
+                    <div class="text-lg font-bold text-emerald-400" id="goCorrect">0</div>
+                    <div class="text-xs text-gray-500">Correct</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold text-rose-400" id="goWrong">0</div>
+                    <div class="text-xs text-gray-500">Wrong</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold text-cyan-400" id="goStreak">0</div>
+                    <div class="text-xs text-gray-500">Best Streak</div>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <button id="playAgainBtn" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white py-3 rounded-xl font-bold transition-all">
+                    Play Again
+                </button>
+                <button id="mainMenuBtn" class="w-full bg-white/5 border border-white/10 hover:border-white/30 text-gray-300 hover:text-white py-3 rounded-xl font-semibold transition-all">
+                    Main Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="hidden h-screen flex flex-col">
+        <!-- Question + Score HUD -->
+        <div id="questionPanel" class="flex-shrink-0 px-4 py-3">
+            <div class="max-w-lg mx-auto bg-gray-800/80 backdrop-blur border border-gray-700/50 rounded-xl px-4 py-3 text-center">
+                <div class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Solve</div>
+                <div id="question" class="text-2xl md:text-3xl font-bold text-cyan-300">-4 + 3 = ?</div>
+                <div id="answer" class="text-sm mt-1.5 font-medium min-h-[20px]"></div>
+                <div class="mt-2 flex items-center justify-center gap-4 text-sm">
+                    <span class="text-gray-400">Score: <span id="scoreDisplay" class="text-amber-300 font-bold">0</span></span>
+                    <span class="text-gray-400">Streak: <span id="streakDisplay" class="text-emerald-300 font-bold">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div id="canvasContainer" class="flex-1 flex items-center justify-center px-4 pb-4 min-h-0">
+            <canvas id="gameCanvas" class="rounded-xl shadow-2xl shadow-indigo-500/10"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Cover page elements
+        const coverPage = document.getElementById('coverPage');
+        const instructionsModal = document.getElementById('instructionsModal');
+        const gameOverModal = document.getElementById('gameOverModal');
+        const gameScreen = document.getElementById('gameScreen');
+        const difficultySelection = document.getElementById('difficultySelection');
+        const gameControls = document.getElementById('gameControls');
+
+        let selectedDifficulty = 'easy';
+
+        // Difficulty buttons
+        document.getElementById('easyBtn').addEventListener('click', () => selectDifficulty('easy', 'Easy', 'emerald'));
+        document.getElementById('mediumBtn').addEventListener('click', () => selectDifficulty('medium', 'Medium', 'amber'));
+        document.getElementById('hardBtn').addEventListener('click', () => selectDifficulty('hard', 'Hard', 'rose'));
+
+        function selectDifficulty(diff, label, color) {
+            selectedDifficulty = diff;
+            const badge = document.getElementById('selectedDiffBadge');
+            badge.textContent = label;
+            badge.className = `inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-${color}-500/20 text-${color}-300 border border-${color}-500/40`;
+            difficultySelection.classList.add('hidden');
+            gameControls.classList.remove('hidden');
+        }
+
+        document.getElementById('backBtn').addEventListener('click', () => {
+            gameControls.classList.add('hidden');
+            difficultySelection.classList.remove('hidden');
+        });
+
+        document.getElementById('startGameBtn').addEventListener('click', () => {
+            coverPage.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            gameScreen.classList.add('flex');
+            resizeCanvas();
+            initGame();
+            startGame();
+        });
+
+        document.getElementById('instructionsBtn').addEventListener('click', () => instructionsModal.classList.remove('hidden'));
+        document.getElementById('closeModal').addEventListener('click', () => instructionsModal.classList.add('hidden'));
+        instructionsModal.addEventListener('click', (e) => { if (e.target === instructionsModal) instructionsModal.classList.add('hidden'); });
+
+        // Game over modal buttons
+        document.getElementById('playAgainBtn').addEventListener('click', () => {
+            gameOverModal.classList.add('hidden');
+            initGame();
+            startGame();
+        });
+
+        document.getElementById('mainMenuBtn').addEventListener('click', () => {
+            gameOverModal.classList.add('hidden');
+            gameScreen.classList.add('hidden');
+            gameScreen.classList.remove('flex');
+            coverPage.classList.remove('hidden');
+            gameControls.classList.add('hidden');
+            difficultySelection.classList.remove('hidden');
+        });
+
+        // Canvas setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gridSize, tilesX, tilesY;
+
+        function resizeCanvas() {
+            const container = document.getElementById('canvasContainer');
+            const maxW = container.clientWidth - 32;
+            const maxH = container.clientHeight - 16;
+
+            const isMobile = window.innerWidth <= 768;
+            const targetTilesX = isMobile ? 16 : 30;
+            const targetTilesY = isMobile ? 22 : 20;
+
+            gridSize = Math.floor(Math.min(maxW / targetTilesX, maxH / targetTilesY));
+            gridSize = Math.max(gridSize, 12);
+
+            tilesX = Math.floor(maxW / gridSize);
+            tilesY = Math.floor(maxH / gridSize);
+            tilesX = Math.min(tilesX, 40);
+            tilesY = Math.min(tilesY, 30);
+
+            canvas.width = tilesX * gridSize;
+            canvas.height = tilesY * gridSize;
+        }
+
+        window.addEventListener('resize', () => {
+            if (!gameScreen.classList.contains('hidden')) {
+                resizeCanvas();
+                if (game) draw();
+            }
+        });
+
+        // Game state
+        let game = null;
+
+        function initGame() {
+            game = {
+                snake: [{ x: Math.floor(tilesX / 2), y: Math.floor(tilesY / 2) }],
+                dx: 1,
+                dy: 0,
+                bubbles: [],
+                currentQuestion: null,
+                correctAnswer: 0,
+                score: 0,
+                streak: 0,
+                bestStreak: 0,
+                correctCount: 0,
+                wrongCount: 0,
+                isRunning: false,
+                isPaused: false,
+                gameSpeed: 180,
+                canChangeDirection: true,
+                wrongAnswerFlash: 0,
+                penetrationItem: null,
+                penetrationActive: false,
+                penetrationCount: 0
+            };
+
+            document.getElementById('scoreDisplay').textContent = '0';
+            document.getElementById('streakDisplay').textContent = '0';
+            document.getElementById('answer').textContent = '';
+
+            setNewQuestion();
+            draw();
+        }
+
+        function startGame() {
+            game.isRunning = true;
+            game.isPaused = false;
+            gameLoop();
+        }
+
+        // Question generation
+        function formatFirstNumber(num) { return `${num}`; }
+        function formatNumber(num) { return num < 0 ? `(${num})` : `${num}`; }
+
+        function generateQuestion() {
+            let answer, questionText;
+            do {
+                if (selectedDifficulty === 'easy') {
+                    const operation = ['+', '-'][Math.floor(Math.random() * 2)];
+                    let num1, num2;
+                    do {
+                        num1 = Math.floor(Math.random() * 21) - 10;
+                        num2 = Math.floor(Math.random() * 21) - 10;
+                    } while ((num1 >= 0 && num2 >= 0) || num2 === 0);
+
+                    if (operation === '+') { answer = num1 + num2; questionText = `${formatFirstNumber(num1)} + ${formatNumber(num2)}`; }
+                    else { answer = num1 - num2; questionText = `${formatFirstNumber(num1)} - ${formatNumber(num2)}`; }
+                } else if (selectedDifficulty === 'medium') {
+                    const operations = ['+', '-', '*'];
+                    const operation = operations[Math.floor(Math.random() * operations.length)];
+                    let num1, num2;
+
+                    if (operation === '*') {
+                        do {
+                            num1 = Math.floor(Math.random() * 21) - 10;
+                            num2 = Math.floor(Math.random() * 11) - 5;
+                        } while (num1 >= 0 && num2 >= 0 && num1 === 0 && num2 === 0);
+                        answer = num1 * num2;
+                        questionText = `${formatFirstNumber(num1)} x ${formatNumber(num2)}`;
+                    } else {
+                        do {
+                            num1 = Math.floor(Math.random() * 21) - 10;
+                            num2 = Math.floor(Math.random() * 21) - 10;
+                        } while ((num1 >= 0 && num2 >= 0) || num2 === 0);
+                        if (operation === '+') { answer = num1 + num2; questionText = `${formatFirstNumber(num1)} + ${formatNumber(num2)}`; }
+                        else { answer = num1 - num2; questionText = `${formatFirstNumber(num1)} - ${formatNumber(num2)}`; }
+                    }
+                } else {
+                    const operations = ['+', '-', '*', '/'];
+                    const op1 = operations[Math.floor(Math.random() * operations.length)];
+                    const op2 = operations[Math.floor(Math.random() * operations.length)];
+                    let num1, num2, num3, intermediate;
+
+                    do {
+                        if (op1 === '/') {
+                            const divisors = [-8, -6, -4, -3, -2, -1, 1, 2, 3, 4, 6, 8];
+                            const quotients = [-10, -8, -6, -4, -3, -2, -1, 1, 2, 3, 4, 6, 8, 10];
+                            num2 = divisors[Math.floor(Math.random() * divisors.length)];
+                            const quotient = quotients[Math.floor(Math.random() * quotients.length)];
+                            num1 = num2 * quotient;
+                        } else {
+                            num1 = Math.floor(Math.random() * 21) - 10;
+                            num2 = Math.floor(Math.random() * 21) - 10;
+                        }
+                    } while (num1 >= 0 && num2 >= 0 && num2 !== 0);
+
+                    if (op1 === '+') intermediate = num1 + num2;
+                    else if (op1 === '-') intermediate = num1 - num2;
+                    else if (op1 === '*') intermediate = num1 * num2;
+                    else intermediate = num1 / num2;
+
+                    if (op2 === '/') {
+                        const possibleDivisors = [];
+                        for (let d = -10; d <= 10; d++) {
+                            if (d !== 0 && intermediate % d === 0 && Math.abs(intermediate / d) <= 99) possibleDivisors.push(d);
+                        }
+                        num3 = possibleDivisors.length > 0 ? possibleDivisors[Math.floor(Math.random() * possibleDivisors.length)] : [-2, -1, 1, 2][Math.floor(Math.random() * 4)];
+                    } else {
+                        do { num3 = Math.floor(Math.random() * 21) - 10; } while (num3 === 0 && (op2 === '+' || op2 === '-'));
+                    }
+
+                    if (op2 === '+') answer = intermediate + num3;
+                    else if (op2 === '-') answer = intermediate - num3;
+                    else if (op2 === '*') answer = intermediate * num3;
+                    else answer = intermediate / num3;
+
+                    let op1Symbol = op1 === '*' ? 'x' : (op1 === '/' ? '÷' : op1);
+                    let op2Symbol = op2 === '*' ? 'x' : (op2 === '/' ? '÷' : op2);
+                    const part1 = `${formatFirstNumber(num1)} ${op1Symbol} ${formatNumber(num2)}`;
+                    questionText = num2 < 0 ? `[${part1}] ${op2Symbol} ${formatNumber(num3)}` : `(${part1}) ${op2Symbol} ${formatNumber(num3)}`;
+                }
+            } while (Math.abs(answer) > 99 || isNaN(answer) || !isFinite(answer) || answer !== Math.floor(answer));
+
+            return { question: questionText, answer: answer };
+        }
+
+        function generateBubbles() {
+            game.bubbles = [];
+            const correctAnswer = game.correctAnswer;
+
+            let correctX, correctY;
+            do {
+                correctX = Math.floor(Math.random() * tilesX);
+                correctY = Math.floor(Math.random() * tilesY);
+            } while (game.snake.some(s => s.x === correctX && s.y === correctY));
+
+            game.bubbles.push({ x: correctX, y: correctY, value: correctAnswer, isCorrect: true });
+
+            const wrongAnswers = new Set();
+            while (wrongAnswers.size < 8) {
+                let wrongAnswer = correctAnswer + (Math.floor(Math.random() * 21) - 10);
+                if (wrongAnswer !== correctAnswer) wrongAnswers.add(wrongAnswer);
+            }
+
+            wrongAnswers.forEach(value => {
+                let x, y;
+                do {
+                    x = Math.floor(Math.random() * tilesX);
+                    y = Math.floor(Math.random() * tilesY);
+                } while (game.bubbles.some(b => b.x === x && b.y === y) || game.snake.some(s => s.x === x && s.y === y));
+                game.bubbles.push({ x, y, value, isCorrect: false });
+            });
+        }
+
+        function generatePenetrationItem() {
+            if (!game.penetrationItem && !game.penetrationActive && Math.random() < 0.15) {
+                let x, y;
+                do {
+                    x = Math.floor(Math.random() * tilesX);
+                    y = Math.floor(Math.random() * tilesY);
+                } while (game.bubbles.some(b => b.x === x && b.y === y) || game.snake.some(s => s.x === x && s.y === y));
+                game.penetrationItem = { x, y };
+            }
+        }
+
+        function setNewQuestion() {
+            const q = generateQuestion();
+            game.currentQuestion = q.question;
+            game.correctAnswer = q.answer;
+            document.getElementById('question').textContent = `${q.question} = ?`;
+            document.getElementById('answer').textContent = '';
+            generateBubbles();
+            generatePenetrationItem();
+        }
+
+        // Drawing
+        function draw() {
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grid lines (subtle)
+            ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= tilesX; i++) {
+                ctx.beginPath(); ctx.moveTo(i * gridSize, 0); ctx.lineTo(i * gridSize, canvas.height); ctx.stroke();
+            }
+            for (let i = 0; i <= tilesY; i++) {
+                ctx.beginPath(); ctx.moveTo(0, i * gridSize); ctx.lineTo(canvas.width, i * gridSize); ctx.stroke();
+            }
+
+            // Border glow when penetration active
+            if (game.penetrationActive) {
+                ctx.strokeStyle = 'rgba(16, 185, 129, 0.6)';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(1.5, 1.5, canvas.width - 3, canvas.height - 3);
+            }
+
+            // Snake
+            game.snake.forEach((segment, index) => {
+                const x = segment.x * gridSize;
+                const y = segment.y * gridSize;
+                const s = gridSize - 2;
+
+                if (game.wrongAnswerFlash > 0) {
+                    const intensity = game.wrongAnswerFlash / 10;
+                    ctx.fillStyle = `rgba(239, 68, 68, ${intensity * 0.5})`;
+                    ctx.fillRect(x - 2, y - 2, s + 4, s + 4);
+                }
+
+                const gradient = ctx.createLinearGradient(x, y, x + s, y + s);
+                if (index === 0) {
+                    gradient.addColorStop(0, '#34d399');
+                    gradient.addColorStop(1, '#059669');
+                } else {
+                    gradient.addColorStop(0, '#10b981');
+                    gradient.addColorStop(1, '#047857');
+                }
+                ctx.fillStyle = gradient;
+
+                const radius = Math.min(4, gridSize / 5);
+                ctx.beginPath();
+                ctx.roundRect(x + 1, y + 1, s, s, radius);
+                ctx.fill();
+
+                // Head eyes
+                if (index === 0) {
+                    ctx.fillStyle = 'white';
+                    const eyeSize = Math.max(2, gridSize / 7);
+                    ctx.beginPath(); ctx.arc(x + s * 0.3, y + s * 0.35, eyeSize, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(x + s * 0.7, y + s * 0.35, eyeSize, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = '#1a1a2e';
+                    const pupilSize = Math.max(1, eyeSize * 0.5);
+                    ctx.beginPath(); ctx.arc(x + s * 0.3, y + s * 0.35, pupilSize, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(x + s * 0.7, y + s * 0.35, pupilSize, 0, Math.PI * 2); ctx.fill();
+                }
+            });
+
+            if (game.wrongAnswerFlash > 0) game.wrongAnswerFlash--;
+
+            // Bubbles
+            game.bubbles.forEach(bubble => {
+                const x = bubble.x * gridSize + gridSize / 2;
+                const y = bubble.y * gridSize + gridSize / 2;
+                const r = (gridSize - 4) / 2;
+
+                ctx.fillStyle = '#16213e';
+                ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+                ctx.strokeStyle = 'rgba(99, 102, 241, 0.5)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.fillStyle = '#e2e8f0';
+                const fontSize = Math.max(9, Math.min(14, gridSize * 0.55));
+                ctx.font = `bold ${fontSize}px system-ui`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(bubble.value.toString(), x, y);
+            });
+
+            // Penetration item
+            if (game.penetrationItem) {
+                const x = game.penetrationItem.x * gridSize + gridSize / 2;
+                const y = game.penetrationItem.y * gridSize + gridSize / 2;
+                const r = (gridSize - 4) / 2;
+
+                ctx.fillStyle = '#1e40af';
+                ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+                ctx.strokeStyle = '#60a5fa';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.fillStyle = 'white';
+                const fontSize = Math.max(10, Math.min(16, gridSize * 0.6));
+                ctx.font = `bold ${fontSize}px system-ui`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('P', x, y);
+            }
+        }
+
+        // Snake movement
+        function moveSnake() {
+            const head = { x: game.snake[0].x + game.dx, y: game.snake[0].y + game.dy };
+            game.canChangeDirection = true;
+
+            // Wall collision
+            if (head.x < 0 || head.x >= tilesX || head.y < 0 || head.y >= tilesY) {
+                if (game.penetrationActive) {
+                    if (head.x < 0) head.x = tilesX - 1;
+                    if (head.x >= tilesX) head.x = 0;
+                    if (head.y < 0) head.y = tilesY - 1;
+                    if (head.y >= tilesY) head.y = 0;
+                    game.penetrationCount--;
+                    if (game.penetrationCount <= 0) game.penetrationActive = false;
+                } else {
+                    gameOver('Hit the wall!');
+                    return;
+                }
+            }
+
+            // Self collision
+            if (game.snake.some(s => s.x === head.x && s.y === head.y)) {
+                gameOver('Hit yourself!');
+                return;
+            }
+
+            // Penetration item pickup
+            if (game.penetrationItem && head.x === game.penetrationItem.x && head.y === game.penetrationItem.y) {
+                game.snake.unshift(head);
+                game.penetrationActive = true;
+                game.penetrationCount = 3;
+                game.penetrationItem = null;
+                game.snake.pop();
+                return;
+            }
+
+            // Bubble collision
+            const eatenBubble = game.bubbles.find(b => b.x === head.x && b.y === head.y);
+
+            if (eatenBubble) {
+                const answerEl = document.getElementById('answer');
+                const questionPanel = document.getElementById('questionPanel');
+
+                if (eatenBubble.isCorrect) {
+                    game.snake.unshift(head);
+                    game.streak++;
+                    game.correctCount++;
+                    if (game.streak > game.bestStreak) game.bestStreak = game.streak;
+
+                    // Streak-based scoring: base 10, +5 per streak level
+                    const points = 10 + (game.streak - 1) * 5;
+                    game.score += points;
+
+                    answerEl.textContent = `+${points} pts! ${game.currentQuestion} = ${eatenBubble.value}`;
+                    answerEl.className = 'text-sm mt-1.5 font-medium min-h-[20px] text-emerald-400';
+                    questionPanel.querySelector('.max-w-lg').classList.add('flash-correct');
+                    setTimeout(() => questionPanel.querySelector('.max-w-lg').classList.remove('flash-correct'), 400);
+                } else {
+                    game.wrongCount++;
+                    game.wrongAnswerFlash = 10;
+                    game.streak = 0;
+
+                    // Wrong answer: snake grows by 1 as penalty
+                    game.snake.unshift(head);
+
+                    // Deduct points (minimum 0)
+                    const deduction = 5;
+                    game.score = Math.max(0, game.score - deduction);
+
+                    answerEl.textContent = `-${deduction} pts! Answer was ${game.correctAnswer}, not ${eatenBubble.value}`;
+                    answerEl.className = 'text-sm mt-1.5 font-medium min-h-[20px] text-rose-400';
+                    questionPanel.querySelector('.max-w-lg').classList.add('flash-wrong');
+                    setTimeout(() => questionPanel.querySelector('.max-w-lg').classList.remove('flash-wrong'), 400);
+                }
+
+                // Speed up slightly every 5 correct
+                if (game.correctCount > 0 && game.correctCount % 5 === 0) {
+                    game.gameSpeed = Math.max(80, game.gameSpeed - 10);
+                }
+
+                updateHUD();
+                setNewQuestion();
+            } else {
+                game.snake.unshift(head);
+                game.snake.pop();
+            }
+        }
+
+        function updateHUD() {
+            document.getElementById('scoreDisplay').textContent = game.score;
+            document.getElementById('streakDisplay').textContent = game.streak;
+        }
+
+        function gameOver(reason) {
+            game.isRunning = false;
+
+            // Show game over modal
+            document.getElementById('gameOverReason').textContent = reason;
+            document.getElementById('gameOverScore').textContent = game.score;
+            document.getElementById('goCorrect').textContent = game.correctCount;
+            document.getElementById('goWrong').textContent = game.wrongCount;
+            document.getElementById('goStreak').textContent = game.bestStreak;
+            gameOverModal.classList.remove('hidden');
+
+            // Post score to parent
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'mkpc:score',
+                        subject: 'mathematics',
+                        gameId: 'math-snake',
+                        score: game.score,
+                        metadata: {
+                            correct: game.correctCount,
+                            wrong: game.wrongCount,
+                            bestStreak: game.bestStreak,
+                            reason: reason,
+                        },
+                    }, '*');
+                }
+            } catch (e) { }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (!game.isRunning || game.isPaused) return;
+            moveSnake();
+            draw();
+            setTimeout(gameLoop, game.gameSpeed);
+        }
+
+        // Controls - Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (!game || !game.isRunning || game.isPaused || !game.canChangeDirection) return;
+            switch (e.key.toLowerCase()) {
+                case 'w': case 'arrowup': if (game.dy !== 1) { game.dx = 0; game.dy = -1; game.canChangeDirection = false; } e.preventDefault(); break;
+                case 's': case 'arrowdown': if (game.dy !== -1) { game.dx = 0; game.dy = 1; game.canChangeDirection = false; } e.preventDefault(); break;
+                case 'a': case 'arrowleft': if (game.dx !== 1) { game.dx = -1; game.dy = 0; game.canChangeDirection = false; } e.preventDefault(); break;
+                case 'd': case 'arrowright': if (game.dx !== -1) { game.dx = 1; game.dy = 0; game.canChangeDirection = false; } e.preventDefault(); break;
+            }
+        });
+
+        // Controls - Touch/Swipe
+        let touchStartX = 0, touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            if (!game || !game.isRunning) return;
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartY = e.changedTouches[0].clientY;
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            if (!game || !game.isRunning || game.isPaused || !game.canChangeDirection) return;
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            const minSwipe = 30;
+
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (dx > minSwipe && game.dx !== -1) { game.dx = 1; game.dy = 0; game.canChangeDirection = false; }
+                else if (dx < -minSwipe && game.dx !== 1) { game.dx = -1; game.dy = 0; game.canChangeDirection = false; }
+            } else {
+                if (dy > minSwipe && game.dy !== -1) { game.dx = 0; game.dy = 1; game.canChangeDirection = false; }
+                else if (dy < -minSwipe && game.dy !== 1) { game.dx = 0; game.dy = -1; game.canChangeDirection = false; }
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        // Score emission on leave
+        (function () {
+            function emitOnLeave() {
+                try {
+                    if (!game || window.parent === window) return;
+                    window.parent.postMessage({
+                        type: 'mkpc:score',
+                        subject: 'mathematics',
+                        gameId: 'math-snake',
+                        score: game.score || 0,
+                        metadata: {
+                            correct: game.correctCount || 0,
+                            wrong: game.wrongCount || 0,
+                            bestStreak: game.bestStreak || 0,
+                            reason: 'leave',
+                        },
+                    }, '*');
+                } catch (e) { }
+            }
+            window.addEventListener('pagehide', emitOnLeave);
+            window.addEventListener('beforeunload', emitOnLeave);
+            window.addEventListener('message', function (evt) {
+                if (evt.data && evt.data.type === 'mkpc:requestScore') emitOnLeave();
+            });
+        })();
+    </script>
+</body>
+
+</html>
