@@ -2,6 +2,7 @@ export type Lang = 'tc' | 'sc' | 'en';
 
 const translations: Record<string, { tc: string; sc: string; en: string }> = {
   title: { tc: '萬鈞伯裘書院AI工作坊', sc: '万钧伯裘书院AI工作坊', en: 'MKPC AI Workshop' },
+  geminiGroup: { tc: 'Gemini', sc: 'Gemini', en: 'Gemini' },
   geminiGem: { tc: 'Gemini Gem', sc: 'Gemini Gem', en: 'Gemini Gem' },
   imageGen: { tc: '圖片生成', sc: '图片生成', en: 'Image Generation' },
   appGame: { tc: 'App/遊戲生成', sc: 'App/游戏生成', en: 'App/Game Generation' },
@@ -50,6 +51,16 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   step: { tc: '步驟', sc: '步骤', en: 'Step' },
   openGemini: { tc: '開啟 Gemini', sc: '开启 Gemini', en: 'Open Gemini' },
   sampleOutput: { tc: '效果示例', sc: '效果示例', en: 'Sample Output' },
+  qwenWork: { tc: 'Qwen Work', sc: 'Qwen Work', en: 'Qwen Work' },
+  qwenWorkComingSoon: { tc: '即將推出', sc: '即将推出', en: 'Coming Soon' },
+  qwenWorkPlaceholder: {
+    tc: 'Qwen Work 教學內容即將新增，敬請期待。',
+    sc: 'Qwen Work 教学内容即将新增，敬请期待。',
+    en: 'Qwen Work guides will be added here soon.',
+  },
+  sidebarNav: { tc: '導覽', sc: '导览', en: 'Navigation' },
+  openMenu: { tc: '開啟選單', sc: '开启选单', en: 'Open menu' },
+  closeMenu: { tc: '關閉選單', sc: '关闭选单', en: 'Close menu' },
   pptTab: { tc: '簡報生成', sc: '简报生成', en: 'Presentation' },
   pptStepsTitle: { tc: '簡報生成步驟', sc: '简报生成步骤', en: 'Presentation Generation Steps' },
   pptStep1: { tc: '輸入提示詞', sc: '输入提示词', en: 'Enter prompt' },
