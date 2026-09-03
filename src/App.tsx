@@ -7,6 +7,7 @@ import { AppGameTab } from './components/AppGameTab';
 import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { QwenWebTab } from './components/QwenWebTab';
+import { QwenWorksheetsTab } from './components/QwenWorksheetsTab';
 import { Page, Sidebar } from './components/Sidebar';
 import { Lang, t } from './i18n';
 import { assetUrl } from './assetUrl';
@@ -20,7 +21,7 @@ function App() {
 
   const handleSelect = (page: Page) => {
     setActivePage(page);
-    if (page === 'qwen' || page === 'qwenWeb') {
+    if (page === 'qwen' || page === 'qwenWeb' || page === 'qwenWorksheets') {
       setQwenOpen(true);
     } else {
       setGeminiOpen(true);
@@ -89,8 +90,15 @@ function App() {
             {activePage === 'image' && <ImageGenTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
-            {activePage === 'qwen' && <QwenWorkTab lang={lang} onOpenWebGuide={() => handleSelect('qwenWeb')} />}
+            {activePage === 'qwen' && (
+              <QwenWorkTab
+                lang={lang}
+                onOpenWebGuide={() => handleSelect('qwenWeb')}
+                onOpenWorksheetsGuide={() => handleSelect('qwenWorksheets')}
+              />
+            )}
             {activePage === 'qwenWeb' && <QwenWebTab lang={lang} />}
+            {activePage === 'qwenWorksheets' && <QwenWorksheetsTab lang={lang} />}
           </main>
 
           <footer className="border-t border-slate-200/70 py-6 text-center text-sm text-slate-400">
