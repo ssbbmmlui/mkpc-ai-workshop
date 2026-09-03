@@ -162,7 +162,8 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     sc: '贴上参考提示词，等待生成已填好的 Word 会议记录',
     en: 'Paste the reference prompt and wait for the completed Word minutes',
   },
-  qwenMinutesPromptEnTitle: { tc: '英文翻譯', sc: '英文翻译', en: 'English translation' },
+  qwenMinutesPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
+  qwenMinutesPromptEnTitle: { tc: '英文版本提示詞', sc: '英文版本提示词', en: 'English prompt' },
   qwenMinutesPromptNote: {
     tc: '下方為中文提示詞，其後為英文翻譯，可分別一鍵複製。',
     sc: '下方为中文提示词，其后为英文翻译，可分别一键复制。',
