@@ -32,16 +32,16 @@ function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: 
   const geminiActive = activePage !== 'qwen';
 
   return (
-    <nav className="flex flex-col gap-1 p-3" aria-label={t('sidebarNav', lang)}>
+    <nav className="flex flex-col gap-2 p-4" aria-label={t('sidebarNav', lang)}>
       <div>
         <button
           type="button"
           onClick={onToggleGemini}
           aria-expanded={geminiOpen}
-          className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+          className={`flex w-full items-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
             geminiActive
-              ? 'text-sky-700 bg-sky-50'
-              : 'text-slate-700 hover:bg-slate-100'
+              ? 'bg-sky-50 text-sky-700 shadow-sm ring-1 ring-sky-100'
+              : 'text-slate-700 hover:bg-white/80'
           }`}
         >
           <Sparkles size={18} className="shrink-0" />
@@ -50,17 +50,17 @@ function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: 
         </button>
 
         {geminiOpen && (
-          <div className="mt-1 ml-4 pl-2 border-l border-slate-200 flex flex-col gap-0.5">
+          <div className="mt-1 ml-3 flex flex-col gap-0.5 border-l border-slate-200/80 pl-2">
             {geminiItems.map(({ id, icon: Icon, labelKey }) => (
               <button
                 key={id}
                 type="button"
                 onClick={() => onSelect(id)}
                 aria-current={activePage === id ? 'page' : undefined}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition ${
                   activePage === id
-                    ? 'bg-sky-100 text-sky-700 font-semibold'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                    ? 'bg-white font-semibold text-sky-700 shadow-sm ring-1 ring-sky-100'
+                    : 'text-slate-600 hover:bg-white/70 hover:text-slate-800'
                 }`}
               >
                 <Icon size={16} className="shrink-0" />
@@ -75,10 +75,10 @@ function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: 
         type="button"
         onClick={() => onSelect('qwen')}
         aria-current={activePage === 'qwen' ? 'page' : undefined}
-        className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+        className={`flex w-full items-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
           activePage === 'qwen'
-            ? 'bg-violet-50 text-violet-700'
-            : 'text-slate-700 hover:bg-slate-100'
+            ? 'bg-violet-50 text-violet-700 shadow-sm ring-1 ring-violet-100'
+            : 'text-slate-700 hover:bg-white/80'
         }`}
       >
         <Briefcase size={18} className="shrink-0" />
@@ -135,7 +135,7 @@ export function Sidebar({
 
   return (
     <>
-      <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-slate-200 bg-white sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto">
+      <aside className="sticky top-20 hidden h-[calc(100vh-5rem)] w-64 shrink-0 flex-col overflow-y-auto border-r border-white/70 bg-white/55 backdrop-blur-xl md:flex">
         <SidebarNav {...navProps} />
       </aside>
 
@@ -147,13 +147,13 @@ export function Sidebar({
             aria-label={t('closeMenu', lang)}
             onClick={onClose}
           />
-          <aside className="relative h-full w-72 max-w-[85vw] bg-white shadow-xl flex flex-col">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+          <aside className="relative flex h-full w-72 max-w-[85vw] flex-col bg-white/95 shadow-2xl backdrop-blur-xl">
+            <div className="flex items-center justify-between border-b border-slate-200/80 px-4 py-3">
               <span className="font-semibold text-slate-800">{t('sidebarNav', lang)}</span>
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+                className="rounded-xl p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
                 aria-label={t('closeMenu', lang)}
               >
                 <X size={18} />
