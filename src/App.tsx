@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Languages, Menu } from 'lucide-react';
+import { GeminiHomeTab } from './components/GeminiHomeTab';
 import { GeminiTab } from './components/GeminiTab';
 import { ImageGenTab } from './components/ImageGenTab';
 import { AppGameTab } from './components/AppGameTab';
@@ -83,7 +84,8 @@ function App() {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 md:px-8">
-            {activePage === 'gemini' && <GeminiTab lang={lang} />}
+            {activePage === 'gemini' && <GeminiHomeTab lang={lang} />}
+            {activePage === 'geminiGem' && <GeminiTab lang={lang} />}
             {activePage === 'image' && <ImageGenTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
