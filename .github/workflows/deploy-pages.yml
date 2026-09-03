@@ -38,6 +38,19 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify production index
+        run: |
+          echo '--- dist/index.html ---'
+          cat dist/index.html
+          if grep -q '/src/main.tsx' dist/index.html; then
+            echo 'Build still points at /src/main.tsx; refusing to deploy source HTML'
+            exit 1
+          fi
+          if ! grep -q '/mkpc-ai-workshop/assets/' dist/index.html; then
+            echo 'Build is missing the GitHub Pages asset base path'
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
