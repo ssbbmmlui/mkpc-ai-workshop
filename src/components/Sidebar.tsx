@@ -35,8 +35,8 @@ const geminiItems: {
 ];
 
 const qwenItems: { id: Extract<Page, 'qwenWeb' | 'qwenWorksheets'>; icon: typeof Sparkles; labelKey: string }[] = [
-  { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
   { id: 'qwenWorksheets', icon: FileText, labelKey: 'qwenWorksheets' },
+  { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
 ];
 
 const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'app', 'presentation'];
