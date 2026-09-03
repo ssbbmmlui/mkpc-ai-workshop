@@ -7,29 +7,56 @@ import {
   Briefcase,
   ChevronDown,
   ChevronRight,
+  Globe,
   X,
 } from 'lucide-react';
 import { Lang, t } from '../i18n';
 
-export type Page = 'gemini' | 'image' | 'app' | 'presentation' | 'qwen';
+export type Page = 'gemini' | 'image' | 'app' | 'presentation' | 'qwen' | 'qwenWeb';
 
-const geminiItems: { id: Exclude<Page, 'qwen'>; icon: typeof Sparkles; labelKey: string }[] = [
+const geminiItems: { id: Exclude<Page, 'qwen' | 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
   { id: 'gemini', icon: Sparkles, labelKey: 'geminiGem' },
   { id: 'image', icon: Image, labelKey: 'imageGen' },
   { id: 'app', icon: Gamepad2, labelKey: 'appGame' },
   { id: 'presentation', icon: Presentation, labelKey: 'pptTab' },
 ];
 
+const qwenItems: { id: Extract<Page, 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
+  { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
+];
+
+const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb'];
+
 interface NavProps {
   lang: Lang;
   activePage: Page;
   geminiOpen: boolean;
+  qwenOpen: boolean;
   onToggleGemini: () => void;
+  onToggleQwen: () => void;
   onSelect: (page: Page) => void;
 }
 
-function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: NavProps) {
-  const geminiActive = activePage !== 'qwen';
+function itemClass(active: boolean, tone: 'sky' | 'violet') {
+  if (active) {
+    return tone === 'sky'
+      ? 'bg-white font-semibold text-sky-700 shadow-sm ring-1 ring-sky-100'
+      : 'bg-white font-semibold text-violet-700 shadow-sm ring-1 ring-violet-100';
+  }
+  return 'text-slate-600 hover:bg-white/70 hover:text-slate-800';
+}
+
+function SidebarNav({
+  lang,
+  activePage,
+  geminiOpen,
+  qwenOpen,
+  onToggleGemini,
+  onToggleQwen,
+  onSelect,
+}: NavProps) {
+  const geminiActive = !QWEN_PAGES.includes(activePage);
+  const qwenActive = QWEN_PAGES.includes(activePage);
 
   return (
     <nav className="flex flex-col gap-2 p-4" aria-label={t('sidebarNav', lang)}>
@@ -57,11 +84,7 @@ function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: 
                 type="button"
                 onClick={() => onSelect(id)}
                 aria-current={activePage === id ? 'page' : undefined}
-                className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition ${
-                  activePage === id
-                    ? 'bg-white font-semibold text-sky-700 shadow-sm ring-1 ring-sky-100'
-                    : 'text-slate-600 hover:bg-white/70 hover:text-slate-800'
-                }`}
+                className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition ${itemClass(activePage === id, 'sky')}`}
               >
                 <Icon size={16} className="shrink-0" />
                 {t(labelKey, lang)}
@@ -71,19 +94,54 @@ function SidebarNav({ lang, activePage, geminiOpen, onToggleGemini, onSelect }: 
         )}
       </div>
 
-      <button
-        type="button"
-        onClick={() => onSelect('qwen')}
-        aria-current={activePage === 'qwen' ? 'page' : undefined}
-        className={`flex w-full items-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
-          activePage === 'qwen'
-            ? 'bg-violet-50 text-violet-700 shadow-sm ring-1 ring-violet-100'
-            : 'text-slate-700 hover:bg-white/80'
-        }`}
-      >
-        <Briefcase size={18} className="shrink-0" />
-        <span className="text-left">{t('qwenWork', lang)}</span>
-      </button>
+      <div>
+        <div
+          className={`flex w-full items-center gap-1 rounded-2xl px-1.5 py-1 text-sm font-semibold transition ${
+            qwenActive
+              ? 'bg-violet-50 text-violet-700 shadow-sm ring-1 ring-violet-100'
+              : 'text-slate-700'
+          }`}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              onSelect('qwen');
+              if (!qwenOpen) onToggleQwen();
+            }}
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-xl px-1.5 py-1.5 text-left hover:bg-white/60"
+            aria-current={activePage === 'qwen' ? 'page' : undefined}
+          >
+            <Briefcase size={18} className="shrink-0" />
+            <span className="truncate">{t('qwenWork', lang)}</span>
+          </button>
+          <button
+            type="button"
+            onClick={onToggleQwen}
+            aria-expanded={qwenOpen}
+            aria-label={t('qwenWork', lang)}
+            className="rounded-xl p-1.5 hover:bg-white/70"
+          >
+            {qwenOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          </button>
+        </div>
+
+        {qwenOpen && (
+          <div className="mt-1 ml-3 flex flex-col gap-0.5 border-l border-slate-200/80 pl-2">
+            {qwenItems.map(({ id, icon: Icon, labelKey }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => onSelect(id)}
+                aria-current={activePage === id ? 'page' : undefined}
+                className={`flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition ${itemClass(activePage === id, 'violet')}`}
+              >
+                <Icon size={16} className="shrink-0" />
+                {t(labelKey, lang)}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
@@ -92,7 +150,9 @@ interface SidebarProps {
   lang: Lang;
   activePage: Page;
   geminiOpen: boolean;
+  qwenOpen: boolean;
   onToggleGemini: () => void;
+  onToggleQwen: () => void;
   onSelect: (page: Page) => void;
   mobileOpen: boolean;
   onClose: () => void;
@@ -102,7 +162,9 @@ export function Sidebar({
   lang,
   activePage,
   geminiOpen,
+  qwenOpen,
   onToggleGemini,
+  onToggleQwen,
   onSelect,
   mobileOpen,
   onClose,
@@ -129,7 +191,9 @@ export function Sidebar({
     lang,
     activePage,
     geminiOpen,
+    qwenOpen,
     onToggleGemini,
+    onToggleQwen,
     onSelect,
   };
 

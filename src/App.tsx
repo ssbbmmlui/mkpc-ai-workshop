@@ -5,6 +5,7 @@ import { ImageGenTab } from './components/ImageGenTab';
 import { AppGameTab } from './components/AppGameTab';
 import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
+import { QwenWebTab } from './components/QwenWebTab';
 import { Page, Sidebar } from './components/Sidebar';
 import { Lang, t } from './i18n';
 import { assetUrl } from './assetUrl';
@@ -13,11 +14,14 @@ function App() {
   const [activePage, setActivePage] = useState<Page>('gemini');
   const [lang, setLang] = useState<Lang>('tc');
   const [geminiOpen, setGeminiOpen] = useState(true);
+  const [qwenOpen, setQwenOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSelect = (page: Page) => {
     setActivePage(page);
-    if (page !== 'qwen') {
+    if (page === 'qwen' || page === 'qwenWeb') {
+      setQwenOpen(true);
+    } else {
       setGeminiOpen(true);
     }
     setMenuOpen(false);
@@ -69,7 +73,9 @@ function App() {
           lang={lang}
           activePage={activePage}
           geminiOpen={geminiOpen}
+          qwenOpen={qwenOpen}
           onToggleGemini={() => setGeminiOpen((open) => !open)}
+          onToggleQwen={() => setQwenOpen((open) => !open)}
           onSelect={handleSelect}
           mobileOpen={menuOpen}
           onClose={() => setMenuOpen(false)}
@@ -81,7 +87,8 @@ function App() {
             {activePage === 'image' && <ImageGenTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
-            {activePage === 'qwen' && <QwenWorkTab lang={lang} />}
+            {activePage === 'qwen' && <QwenWorkTab lang={lang} onOpenWebGuide={() => handleSelect('qwenWeb')} />}
+            {activePage === 'qwenWeb' && <QwenWebTab lang={lang} />}
           </main>
 
           <footer className="border-t border-slate-200/70 py-6 text-center text-sm text-slate-400">
