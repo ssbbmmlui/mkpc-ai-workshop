@@ -1,6 +1,7 @@
 import { PromptBlock } from './PromptBlock';
 import { LogIn, ExternalLink } from 'lucide-react';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 interface Props {
   lang: Lang;
@@ -35,7 +36,7 @@ export function LoginTab({ lang }: Props) {
           <span className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">1</span>
           <span className="font-medium text-slate-700">{t('loginStep1', lang)}</span>
         </div>
-        <img src="/images/login/login1.png" alt="Login step 1" className="rounded-lg border border-slate-200 max-w-full" />
+        <img src={assetUrl('images/login/login1.png')} alt="Login step 1" className="rounded-lg border border-slate-200 max-w-full" />
       </div>
 
       {/* Step 2 */}

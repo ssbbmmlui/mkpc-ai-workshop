@@ -1,6 +1,7 @@
 import { Presentation } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 const PPT_PROMPT = `生成一個ppt簡報，內容是關於香港大館`;
 
@@ -31,7 +32,7 @@ export function PresentationTab({ lang }: Props) {
           </div>
           <PromptBlock text={PPT_PROMPT} label={t('copyPrompt', lang)} />
           <img
-            src="/images/presentation/ppt1.png"
+            src={assetUrl('images/presentation/ppt1.png')}
             alt="Presentation generation steps"
             className="rounded-lg border border-slate-200 max-w-full md:max-w-lg mt-4"
           />
@@ -43,7 +44,7 @@ export function PresentationTab({ lang }: Props) {
         <h3 className="section-title">{t('sampleOutput', lang)}</h3>
         <div className="step-card p-0 overflow-hidden">
           <img
-            src="/images/presentation/ppt2.png"
+            src={assetUrl('images/presentation/ppt2.png')}
             alt="Presentation sample output"
             className="rounded-xl max-w-full w-full"
           />
