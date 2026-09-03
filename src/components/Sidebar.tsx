@@ -12,10 +12,10 @@ import {
 } from 'lucide-react';
 import { Lang, t } from '../i18n';
 
-export type Page = 'gemini' | 'image' | 'app' | 'presentation' | 'qwen' | 'qwenWeb';
+export type Page = 'gemini' | 'geminiGem' | 'image' | 'app' | 'presentation' | 'qwen' | 'qwenWeb';
 
-const geminiItems: { id: Exclude<Page, 'qwen' | 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
-  { id: 'gemini', icon: Sparkles, labelKey: 'geminiGem' },
+const geminiItems: { id: Exclude<Page, 'gemini' | 'qwen' | 'qwenWeb'>; icon: typeof Sparkles; labelKey: string }[] = [
+  { id: 'geminiGem', icon: Sparkles, labelKey: 'geminiGem' },
   { id: 'image', icon: Image, labelKey: 'imageGen' },
   { id: 'app', icon: Gamepad2, labelKey: 'appGame' },
   { id: 'presentation', icon: Presentation, labelKey: 'pptTab' },
@@ -25,6 +25,7 @@ const qwenItems: { id: Extract<Page, 'qwenWeb'>; icon: typeof Sparkles; labelKey
   { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
 ];
 
+const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'app', 'presentation'];
 const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb'];
 
 interface NavProps {
@@ -55,26 +56,41 @@ function SidebarNav({
   onToggleQwen,
   onSelect,
 }: NavProps) {
-  const geminiActive = !QWEN_PAGES.includes(activePage);
+  const geminiActive = GEMINI_PAGES.includes(activePage);
   const qwenActive = QWEN_PAGES.includes(activePage);
 
   return (
     <nav className="flex flex-col gap-2 p-4" aria-label={t('sidebarNav', lang)}>
       <div>
-        <button
-          type="button"
-          onClick={onToggleGemini}
-          aria-expanded={geminiOpen}
-          className={`flex w-full items-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
+        <div
+          className={`flex w-full items-center gap-1 rounded-2xl px-1.5 py-1 text-sm font-semibold transition ${
             geminiActive
               ? 'bg-sky-50 text-sky-700 shadow-sm ring-1 ring-sky-100'
-              : 'text-slate-700 hover:bg-white/80'
+              : 'text-slate-700'
           }`}
         >
-          <Sparkles size={18} className="shrink-0" />
-          <span className="flex-1 text-left">{t('geminiGroup', lang)}</span>
-          {geminiOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              onSelect('gemini');
+              if (!geminiOpen) onToggleGemini();
+            }}
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-xl px-1.5 py-1.5 text-left hover:bg-white/60"
+            aria-current={activePage === 'gemini' ? 'page' : undefined}
+          >
+            <Sparkles size={18} className="shrink-0" />
+            <span className="truncate">{t('geminiGroup', lang)}</span>
+          </button>
+          <button
+            type="button"
+            onClick={onToggleGemini}
+            aria-expanded={geminiOpen}
+            aria-label={t('geminiGroup', lang)}
+            className="rounded-xl p-1.5 hover:bg-white/70"
+          >
+            {geminiOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          </button>
+        </div>
 
         {geminiOpen && (
           <div className="mt-1 ml-3 flex flex-col gap-0.5 border-l border-slate-200/80 pl-2">

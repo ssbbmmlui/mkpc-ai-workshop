@@ -3,6 +3,38 @@ export type Lang = 'tc' | 'sc' | 'en';
 const translations: Record<string, { tc: string; sc: string; en: string }> = {
   title: { tc: '萬鈞伯裘書院AI工作坊', sc: '万钧伯裘书院AI工作坊', en: 'MKPC AI Workshop' },
   geminiGroup: { tc: 'Gemini', sc: 'Gemini', en: 'Gemini' },
+  geminiEyebrow: { tc: 'Google 生成式 AI 助理', sc: 'Google 生成式 AI 助理', en: 'Google generative AI assistant' },
+  geminiHeadline: { tc: 'Gemini', sc: 'Gemini', en: 'Gemini' },
+  geminiPlatformIntro: {
+    tc: 'Gemini 是 Google 開發的多模態 AI 助理，能同時理解文字、圖片、語音與影片。老師可用日常語言備課、分析學生作品，並在網站或手機 App 即時對話。',
+    sc: 'Gemini 是 Google 开发的多模态 AI 助理，能同时理解文字、图片、语音与影片。老师可用日常语言备课、分析学生作品，并在网站或手机 App 即时对话。',
+    en: 'Gemini is Google\'s multimodal AI assistant. It can read text, images, audio, and video together, so teachers can plan lessons, review student work, and talk with it on the web or in the mobile app.',
+  },
+  geminiFeaturesTitle: { tc: '適合教學與學習的重點功能', sc: '适合教学与学习的重点功能', en: 'Features for teaching and learning' },
+  geminiFeatMultiTitle: { tc: '多模態課堂理解', sc: '多模态课堂理解', en: 'Multimodal classroom insight' },
+  geminiFeatMultiBody: {
+    tc: '把學生的文字、圖表、錄音或短片交給 Gemini，一次分析內容並給予教學回饋，適合評核與個別指導。',
+    sc: '把学生的文字、图表、录音或短片交给 Gemini，一次分析内容并给予教学回馈，适合评核与个别指导。',
+    en: 'Give Gemini student writing, diagrams, recordings, or clips so it can analyse the work and suggest teaching feedback.',
+  },
+  geminiFeatGoogleTitle: { tc: '接軌 Google 教學工具', sc: '接轨 Google 教学工具', en: 'Works with Google classroom tools' },
+  geminiFeatGoogleBody: {
+    tc: '可與 Gmail、Google 文件、雲端硬碟和搜尋連動，直接在既有教材與課堂檔案上繼續備課。',
+    sc: '可与 Gmail、Google 文档、云端硬盘和搜索连动，直接在既有教材与课堂档案上继续备课。',
+    en: 'Connect with Gmail, Google Docs, Drive, and Search so lesson files you already use can stay in the same workflow.',
+  },
+  geminiFeatLiveTitle: { tc: '即時教學助理', sc: '即时教学助理', en: 'Live teaching assistant' },
+  geminiFeatLiveBody: {
+    tc: '透過網站或手機 App，以文字或語音快速提問、示範解題與課堂討論，方便備課與臨場講解。',
+    sc: '通过网站或手机 App，以文字或语音快速提问、示范解题与课堂讨论，方便备课与临场讲解。',
+    en: 'Use the website or mobile app to ask questions in text or voice, model solutions, and support live class discussion.',
+  },
+  geminiFeatCreateTitle: { tc: 'Canvas 與圖像教材', sc: 'Canvas 与图像教材', en: 'Canvas and visual materials' },
+  geminiFeatCreateBody: {
+    tc: '用 Canvas 協作撰寫課業或程式，並生成教學圖像，讓抽象概念更容易讓學生看見。',
+    sc: '用 Canvas 协作撰写课业或程式，并生成教学图像，让抽象概念更容易让学生看见。',
+    en: 'Use Canvas to co-write assignments or code, and generate teaching images that make abstract ideas easier to see.',
+  },
   geminiGem: { tc: 'Gemini Gem', sc: 'Gemini Gem', en: 'Gemini Gem' },
   imageGen: { tc: '圖片生成', sc: '图片生成', en: 'Image Generation' },
   appGame: { tc: 'App/遊戲生成', sc: 'App/游戏生成', en: 'App/Game Generation' },
