@@ -120,7 +120,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   qwenWebPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
   qwenWebSampleAlt: { tc: 'Qwen Work 學科遊戲學習平台效果示例', sc: 'Qwen Work 学科游戏学习平台效果示例', en: 'Qwen Work subject game platform sample' },
   qwenWebViewGuide: { tc: '查看教學', sc: '查看教学', en: 'View tutorial' },
-  qwenWorksheets: { tc: 'Differentiated Worksheets', sc: 'Differentiated Worksheets', en: 'Differentiated Worksheets' },
+  qwenWorksheets: { tc: '分層工作紙', sc: '分层工作纸', en: 'Differentiated Worksheets' },
   qwenWorksheetsIntro: {
     tc: '把參考工作紙與教科書上載到 Qwen Work，再貼上提示詞，即可生成基礎程度與進階程度的分層工作紙，版式會對齊原有工作紙與課本內容。',
     sc: '把参考工作纸与教科书上传到 Qwen Work，再贴上提示词，即可生成基础程度与进阶程度的分层工作纸，版式会对齐原有工作纸与课本内容。',
@@ -143,6 +143,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   qwenWorksheetsFileNormal: { tc: '普通程度工作紙（.docx）', sc: '普通程度工作纸（.docx）', en: 'Normal-level worksheet (.docx)' },
   qwenWorksheetsFileTextbook: { tc: '教科書（.pdf）', sc: '教科书（.pdf）', en: 'Textbook (.pdf)' },
+  qwenWorksheetsSampleAlt: { tc: 'Qwen Work 分層工作紙效果示例', sc: 'Qwen Work 分层工作纸效果示例', en: 'Qwen Work differentiated worksheets sample' },
   sidebarNav: { tc: '導覽', sc: '导览', en: 'Navigation' },
   openMenu: { tc: '開啟選單', sc: '开启选单', en: 'Open menu' },
   closeMenu: { tc: '關閉選單', sc: '关闭选单', en: 'Close menu' },

@@ -107,6 +107,17 @@ export function QwenWorksheetsTab({ lang }: Props) {
         <h3 className="section-title">{t('qwenWorksheetsPromptTitle', lang)}</h3>
         <PromptBlock text={QWEN_WORKSHEETS_PROMPT} label={t('copyPrompt', lang)} maxHeight="360px" />
       </div>
+
+      <div>
+        <h3 className="section-title">{t('sampleOutput', lang)}</h3>
+        <div className="step-card overflow-hidden p-0">
+          <img
+            src={assetUrl('images/qwen-work/differentiated-worksheets.png')}
+            alt={t('qwenWorksheetsSampleAlt', lang)}
+            className="h-auto w-full max-w-full"
+          />
+        </div>
+      </div>
     </div>
   );
 }
