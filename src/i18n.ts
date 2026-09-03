@@ -192,6 +192,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   qwenMinutesLessonPromptTitle: { tc: '教案參考提示詞', sc: '教案参考提示词', en: 'Lesson-plan prompt' },
   qwenMinutesSchemePromptTitle: { tc: '教學進度表參考提示詞', sc: '教学进度表参考提示词', en: 'Teaching-progress prompt' },
+  qwenMinutesSampleAlt: { tc: 'Qwen Work 會議記錄效果示例', sc: 'Qwen Work 会议记录效果示例', en: 'Qwen Work meeting minutes sample' },
   sidebarNav: { tc: '導覽', sc: '导览', en: 'Navigation' },
   openMenu: { tc: '開啟選單', sc: '开启选单', en: 'Open menu' },
   closeMenu: { tc: '關閉選單', sc: '关闭选单', en: 'Close menu' },

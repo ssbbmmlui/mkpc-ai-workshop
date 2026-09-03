@@ -1,6 +1,7 @@
 import { ClipboardList, ExternalLink, FileText } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 export const QWEN_MINUTES_PROMPT = `mp4為會議時的錄音
 word檔為會議記錄的temlpate
@@ -86,6 +87,17 @@ export function QwenMinutesTab({ lang }: Props) {
       <div>
         <h3 className="section-title">{t('qwenMinutesPromptEnTitle', lang)}</h3>
         <PromptBlock text={QWEN_MINUTES_PROMPT_EN} label={t('copyPrompt', lang)} maxHeight="240px" />
+      </div>
+
+      <div>
+        <h3 className="section-title">{t('sampleOutput', lang)}</h3>
+        <div className="step-card overflow-hidden p-0">
+          <img
+            src={assetUrl('images/qwen-work/meeting-minutes.png')}
+            alt={t('qwenMinutesSampleAlt', lang)}
+            className="h-auto w-full max-w-full"
+          />
+        </div>
       </div>
 
       <div>
