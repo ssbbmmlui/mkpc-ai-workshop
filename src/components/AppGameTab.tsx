@@ -70,6 +70,14 @@ export function AppGameTab({ lang }: Props) {
         <div className="space-y-4">
           <h4 className="text-lg font-semibold text-slate-700">{t('titrationPromptTitle', lang)}</h4>
           <PromptBlock text={TITRATION_PROMPT} label={t('copyPrompt', lang)} />
+          <h4 className="text-lg font-semibold text-slate-700">{t('tryTitration', lang)}</h4>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <iframe
+              src={assetUrl('apps/titration.html')}
+              title="Acid-Base Titration Simulator"
+              className="h-[800px] w-full border-0"
+            />
+          </div>
         </div>
       </div>
     </div>

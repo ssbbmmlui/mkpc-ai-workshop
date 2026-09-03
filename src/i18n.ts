@@ -68,6 +68,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   appStep3: { tc: '選擇Pro模型', sc: '选择Pro模型', en: 'Select Pro model' },
   snakePromptTitle: { tc: '數學貪食蛇提示詞', sc: '数学贪食蛇提示词', en: 'Math Snake Prompt' },
   tryGame: { tc: '試玩數學貪食蛇', sc: '试玩数学贪食蛇', en: 'Try Math Snake' },
+  tryTitration: { tc: '試用酸鹼滴定模擬器', sc: '试用酸碱滴定模拟器', en: 'Try Acid-Base Titration Simulator' },
   otherPrompts: { tc: '其他供參考的提示詞', sc: '其他供参考的提示词', en: 'Other Reference Prompts' },
   titrationPromptTitle: { tc: '酸鹼滴定模擬器提示詞', sc: '酸碱滴定模拟器提示词', en: 'Acid-Base Titration Simulator Prompt' },
   step: { tc: '步驟', sc: '步骤', en: 'Step' },
