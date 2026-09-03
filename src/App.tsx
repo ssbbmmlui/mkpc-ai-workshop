@@ -8,6 +8,7 @@ import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { QwenWebTab } from './components/QwenWebTab';
 import { QwenWorksheetsTab } from './components/QwenWorksheetsTab';
+import { QwenMinutesTab } from './components/QwenMinutesTab';
 import { SiteTitle } from './components/SiteTitle';
 import { Page, Sidebar } from './components/Sidebar';
 import { Lang, t } from './i18n';
@@ -27,7 +28,7 @@ function App() {
 
   const handleSelect = (page: Page) => {
     setActivePage(page);
-    if (page === 'qwen' || page === 'qwenWeb' || page === 'qwenWorksheets') {
+    if (page === 'qwen' || page === 'qwenWeb' || page === 'qwenWorksheets' || page === 'qwenMinutes') {
       setQwenOpen(true);
     } else {
       setGeminiOpen(true);
@@ -100,10 +101,12 @@ function App() {
                 lang={lang}
                 onOpenWebGuide={() => handleSelect('qwenWeb')}
                 onOpenWorksheetsGuide={() => handleSelect('qwenWorksheets')}
+                onOpenMinutesGuide={() => handleSelect('qwenMinutes')}
               />
             )}
             {activePage === 'qwenWeb' && <QwenWebTab lang={lang} />}
             {activePage === 'qwenWorksheets' && <QwenWorksheetsTab lang={lang} />}
+            {activePage === 'qwenMinutes' && <QwenMinutesTab lang={lang} />}
           </main>
 
           <footer className="border-t border-slate-200/70 py-6 text-center text-sm text-slate-400">

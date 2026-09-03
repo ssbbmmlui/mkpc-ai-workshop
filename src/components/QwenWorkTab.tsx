@@ -5,6 +5,7 @@ interface Props {
   lang: Lang;
   onOpenWebGuide?: () => void;
   onOpenWorksheetsGuide?: () => void;
+  onOpenMinutesGuide?: () => void;
 }
 
 const features = [
@@ -14,7 +15,7 @@ const features = [
   { icon: BookOpen, titleKey: 'qwenFeatWorkflowTitle', bodyKey: 'qwenFeatWorkflowBody' },
 ] as const;
 
-export function QwenWorkTab({ lang, onOpenWebGuide, onOpenWorksheetsGuide }: Props) {
+export function QwenWorkTab({ lang, onOpenWebGuide, onOpenWorksheetsGuide, onOpenMinutesGuide }: Props) {
   return (
     <div className="space-y-8 fade-in-up">
       <section className="relative overflow-hidden rounded-3xl border border-violet-100 bg-gradient-to-br from-violet-600 via-indigo-600 to-sky-600 p-6 text-white shadow-xl shadow-violet-200/40 sm:p-8">
@@ -56,14 +57,27 @@ export function QwenWorkTab({ lang, onOpenWebGuide, onOpenWorksheetsGuide }: Pro
               </div>
               <h4 className="mb-2 text-base font-semibold text-slate-800">{t(titleKey, lang)}</h4>
               <p className="text-sm leading-relaxed text-slate-600">{t(bodyKey, lang)}</p>
-              {titleKey === 'qwenFeatOfficeTitle' && onOpenWorksheetsGuide && (
-                <button
-                  type="button"
-                  onClick={onOpenWorksheetsGuide}
-                  className="mt-4 inline-flex items-center rounded-full bg-violet-50 px-3.5 py-1.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
-                >
-                  {t('qwenWebViewGuide', lang)}
-                </button>
+              {titleKey === 'qwenFeatOfficeTitle' && (onOpenWorksheetsGuide || onOpenMinutesGuide) && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {onOpenWorksheetsGuide && (
+                    <button
+                      type="button"
+                      onClick={onOpenWorksheetsGuide}
+                      className="inline-flex items-center rounded-full bg-violet-50 px-3.5 py-1.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
+                    >
+                      {t('qwenWorksheets', lang)}
+                    </button>
+                  )}
+                  {onOpenMinutesGuide && (
+                    <button
+                      type="button"
+                      onClick={onOpenMinutesGuide}
+                      className="inline-flex items-center rounded-full bg-violet-50 px-3.5 py-1.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
+                    >
+                      {t('qwenMinutes', lang)}
+                    </button>
+                  )}
+                </div>
               )}
               {titleKey === 'qwenFeatWebTitle' && onOpenWebGuide && (
                 <button
