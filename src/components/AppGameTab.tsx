@@ -1,6 +1,7 @@
 import { PromptBlock } from './PromptBlock';
 import { Gamepad2 } from 'lucide-react';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 const SNAKE_PROMPT = `生成一個html數學貪食蛇遊戲
 讓學生學習有向數的四式運算
@@ -39,7 +40,7 @@ export function AppGameTab({ lang }: Props) {
                 <span className="font-medium text-slate-700">{t('appStep3', lang)}</span>
               </div>
             </div>
-            <img src="/images/app-game-generation/app1.png" alt="App generation steps" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
+            <img src={assetUrl('images/app-game-generation/app1.png')} alt="App generation steps" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
           </div>
         </div>
       </div>
@@ -55,7 +56,7 @@ export function AppGameTab({ lang }: Props) {
         <h3 className="section-title">{t('tryGame', lang)}</h3>
         <div className="rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-white">
           <iframe
-            src="/apps/index.html"
+            src={assetUrl('apps/index.html')}
             title="Math Snake Game"
             className="w-full h-[600px] border-0"
           />

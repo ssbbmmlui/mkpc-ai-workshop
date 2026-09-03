@@ -1,6 +1,7 @@
 import { PromptBlock } from './PromptBlock';
 import { Image } from 'lucide-react';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 const COMIC_PROMPT = `生成一個四格漫畫
 內容是教導中三級學生圓錐體的體積及總表面面積
@@ -29,7 +30,7 @@ export function ImageGenTab({ lang }: Props) {
               <span className="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-sm font-bold">1</span>
               <span className="font-medium text-slate-700">{t('imageStep1', lang)}</span>
             </div>
-            <img src="/images/image-generation/image1.png" alt="Step 1" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
+            <img src={assetUrl('images/image-generation/image1.png')} alt="Step 1" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
           </div>
 
           <div className="step-card">
@@ -37,7 +38,7 @@ export function ImageGenTab({ lang }: Props) {
               <span className="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-sm font-bold">2</span>
               <span className="font-medium text-slate-700">{t('imageStep2', lang)}</span>
             </div>
-            <img src="/images/image-generation/image2.png" alt="Step 2" className="rounded-lg border border-slate-200 max-w-full md:max-w-sm" />
+            <img src={assetUrl('images/image-generation/image2.png')} alt="Step 2" className="rounded-lg border border-slate-200 max-w-full md:max-w-sm" />
           </div>
         </div>
       </div>
@@ -48,7 +49,7 @@ export function ImageGenTab({ lang }: Props) {
         <PromptBlock text={COMIC_PROMPT} label={t('copyPrompt', lang)} />
         <div className="mt-4">
           <p className="text-sm text-slate-500 mb-2">{t('sampleOutput', lang)}</p>
-          <img src="/images/image-generation/image3.png" alt="Comic example" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
+          <img src={assetUrl('images/image-generation/image3.png')} alt="Comic example" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
         </div>
       </div>
 
@@ -61,8 +62,8 @@ export function ImageGenTab({ lang }: Props) {
         <PromptBlock text={FIGURE_PROMPT} label={t('copyPrompt', lang)} />
         <div className="mt-4 space-y-4">
           <p className="text-sm text-slate-500">{t('sampleOutput', lang)}</p>
-          <img src="/images/image-generation/image4.png" alt="Figure input" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
-          <img src="/images/image-generation/image5.png" alt="Figure result" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
+          <img src={assetUrl('images/image-generation/image4.png')} alt="Figure input" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
+          <img src={assetUrl('images/image-generation/image5.png')} alt="Figure result" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
         </div>
       </div>
     </div>

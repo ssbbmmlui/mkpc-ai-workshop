@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { PromptBlock } from './PromptBlock';
 import { Download, ExternalLink, Sparkles, Copy, Check } from 'lucide-react';
 import { Lang, t } from '../i18n';
+import { assetUrl } from '../assetUrl';
 
 async function blobDownload(url: string, filename: string) {
   const res = await fetch(url);
@@ -265,7 +266,7 @@ export function GeminiTab({ lang }: Props) {
               <span className="w-7 h-7 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">1</span>
               <span className="font-medium text-slate-700">{t('geminiStep1', lang)}</span>
             </div>
-            <img src="/images/gemini/gem1.png" alt="Step 1" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
+            <img src={assetUrl('images/gemini/gem1.png')} alt="Step 1" className="rounded-lg border border-slate-200 max-w-full md:max-w-md" />
           </div>
 
           {/* Step 2 */}
@@ -274,7 +275,7 @@ export function GeminiTab({ lang }: Props) {
               <span className="w-7 h-7 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">2</span>
               <span className="font-medium text-slate-700">{t('geminiStep2', lang)}</span>
             </div>
-            <img src="/images/gemini/gem2.png" alt="Step 2" className="rounded-lg border border-slate-200 max-w-full" />
+            <img src={assetUrl('images/gemini/gem2.png')} alt="Step 2" className="rounded-lg border border-slate-200 max-w-full" />
           </div>
 
           {/* Step 3 */}
@@ -283,7 +284,7 @@ export function GeminiTab({ lang }: Props) {
               <span className="w-7 h-7 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">3</span>
               <span className="font-medium text-slate-700">{t('geminiStep3', lang)}</span>
             </div>
-            <img src="/images/gemini/gem3.png" alt="Step 3" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
+            <img src={assetUrl('images/gemini/gem3.png')} alt="Step 3" className="rounded-lg border border-slate-200 max-w-full md:max-w-lg" />
           </div>
         </div>
       </div>
@@ -299,14 +300,14 @@ export function GeminiTab({ lang }: Props) {
         <h3 className="section-title">{t('knowledgeSource', lang)}</h3>
         <div className="flex flex-wrap gap-3">
           <button
-            onClick={() => blobDownload('/files/gemini/permutation_排列.pdf', 'permutation_排列.pdf')}
+            onClick={() => blobDownload(assetUrl('files/gemini/permutation_排列.pdf'), 'permutation_排列.pdf')}
             className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 hover:border-slate-300 shadow-sm hover:shadow transition-all font-medium"
           >
             <Download size={18} className="text-sky-500" />
             permutation_排列.pdf
           </button>
           <button
-            onClick={() => blobDownload('/files/gemini/S1-WS-CH2_%28CHN%29.pdf', 'S1-WS-CH2_(CHN).pdf')}
+            onClick={() => blobDownload(assetUrl('files/gemini/S1-WS-CH2_(CHN).pdf'), 'S1-WS-CH2_(CHN).pdf')}
             className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 hover:border-slate-300 shadow-sm hover:shadow transition-all font-medium"
           >
             <Download size={18} className="text-sky-500" />
@@ -321,7 +322,7 @@ export function GeminiTab({ lang }: Props) {
         <SamplePromptCopy lang={lang} />
         <div className="mt-4 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
           <img
-            src="/images/gemini/gem4.png"
+            src={assetUrl('images/gemini/gem4.png')}
             alt="Gemini chat input example"
             className="w-full h-auto"
           />

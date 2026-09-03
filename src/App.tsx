@@ -8,6 +8,7 @@ import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { Page, Sidebar } from './components/Sidebar';
 import { Lang, t } from './i18n';
+import { assetUrl } from './assetUrl';
 
 function App() {
   const [activePage, setActivePage] = useState<Page>('login');
@@ -36,7 +37,7 @@ function App() {
             >
               <Menu size={20} />
             </button>
-            <img src="/MKPC-Logo.png" alt="MKPC Logo" className="h-12 w-auto shrink-0" />
+            <img src={assetUrl('MKPC-Logo.png')} alt="MKPC Logo" className="h-12 w-auto shrink-0" />
             <h1 className="text-lg md:text-2xl font-bold text-slate-800 tracking-tight truncate">
               {t('title', lang)}
             </h1>
