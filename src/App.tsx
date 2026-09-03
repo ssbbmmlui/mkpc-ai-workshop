@@ -3,7 +3,6 @@ import { Languages, Menu } from 'lucide-react';
 import { GeminiTab } from './components/GeminiTab';
 import { ImageGenTab } from './components/ImageGenTab';
 import { AppGameTab } from './components/AppGameTab';
-import { LoginTab } from './components/LoginTab';
 import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { Page, Sidebar } from './components/Sidebar';
@@ -11,7 +10,7 @@ import { Lang, t } from './i18n';
 import { assetUrl } from './assetUrl';
 
 function App() {
-  const [activePage, setActivePage] = useState<Page>('login');
+  const [activePage, setActivePage] = useState<Page>('gemini');
   const [lang, setLang] = useState<Lang>('tc');
   const [geminiOpen, setGeminiOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -82,7 +81,6 @@ function App() {
             {activePage === 'image' && <ImageGenTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
-            {activePage === 'login' && <LoginTab lang={lang} />}
             {activePage === 'qwen' && <QwenWorkTab lang={lang} />}
           </main>
 
