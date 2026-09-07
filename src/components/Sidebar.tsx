@@ -10,6 +10,7 @@ import {
   Globe,
   FileText,
   ClipboardList,
+  Wand2,
   X,
 } from 'lucide-react';
 import { Lang, t } from '../i18n';
@@ -23,10 +24,11 @@ export type Page =
   | 'qwen'
   | 'qwenWeb'
   | 'qwenWorksheets'
-  | 'qwenMinutes';
+  | 'qwenMinutes'
+  | 'qwenSkill';
 
 const geminiItems: {
-  id: Exclude<Page, 'gemini' | 'qwen' | 'qwenWeb' | 'qwenWorksheets' | 'qwenMinutes'>;
+  id: Exclude<Page, 'gemini' | 'qwen' | 'qwenWeb' | 'qwenWorksheets' | 'qwenMinutes' | 'qwenSkill'>;
   icon: typeof Sparkles;
   labelKey: string;
 }[] = [
@@ -37,17 +39,18 @@ const geminiItems: {
 ];
 
 const qwenItems: {
-  id: Extract<Page, 'qwenWeb' | 'qwenWorksheets' | 'qwenMinutes'>;
+  id: Extract<Page, 'qwenWeb' | 'qwenWorksheets' | 'qwenMinutes' | 'qwenSkill'>;
   icon: typeof Sparkles;
   labelKey: string;
 }[] = [
   { id: 'qwenWorksheets', icon: FileText, labelKey: 'qwenWorksheets' },
   { id: 'qwenMinutes', icon: ClipboardList, labelKey: 'qwenMinutes' },
   { id: 'qwenWeb', icon: Globe, labelKey: 'qwenFeatWebTitle' },
+  { id: 'qwenSkill', icon: Wand2, labelKey: 'qwenSkill' },
 ];
 
 const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'app', 'presentation'];
-const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb', 'qwenWorksheets', 'qwenMinutes'];
+const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb', 'qwenWorksheets', 'qwenMinutes', 'qwenSkill'];
 
 interface NavProps {
   lang: Lang;
