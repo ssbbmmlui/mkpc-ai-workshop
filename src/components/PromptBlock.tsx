@@ -30,19 +30,22 @@ export function PromptBlock({ text, label, maxHeight }: PromptBlockProps) {
 
   return (
     <div className="prompt-block group">
-      <button
-        onClick={handleCopy}
-        className={`absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
-          copied
-            ? 'bg-emerald-500 text-white'
-            : 'bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white'
-        }`}
-      >
-        {copied ? <Check size={14} /> : <Copy size={14} />}
-        {copied ? '已複製！' : label}
-      </button>
+      <div className="mb-3 flex justify-end">
+        <button
+          type="button"
+          onClick={handleCopy}
+          className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
+            copied
+              ? 'bg-emerald-500 text-white'
+              : 'bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white'
+          }`}
+        >
+          {copied ? <Check size={14} /> : <Copy size={14} />}
+          {copied ? '已複製！' : label}
+        </button>
+      </div>
       <pre
-        className="whitespace-pre-wrap text-sm leading-relaxed pt-2 overflow-y-auto"
+        className="overflow-y-auto whitespace-pre-wrap text-sm leading-relaxed"
         style={maxHeight ? { maxHeight } : undefined}
       >{text}</pre>
     </div>
