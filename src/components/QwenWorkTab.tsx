@@ -6,6 +6,7 @@ interface Props {
   onOpenWebGuide?: () => void;
   onOpenWorksheetsGuide?: () => void;
   onOpenMinutesGuide?: () => void;
+  onOpenSkillGuide?: () => void;
 }
 
 const features = [
@@ -15,7 +16,13 @@ const features = [
   { icon: BookOpen, titleKey: 'qwenFeatWorkflowTitle', bodyKey: 'qwenFeatWorkflowBody' },
 ] as const;
 
-export function QwenWorkTab({ lang, onOpenWebGuide, onOpenWorksheetsGuide, onOpenMinutesGuide }: Props) {
+export function QwenWorkTab({
+  lang,
+  onOpenWebGuide,
+  onOpenWorksheetsGuide,
+  onOpenMinutesGuide,
+  onOpenSkillGuide,
+}: Props) {
   return (
     <div className="space-y-8 fade-in-up">
       <section className="relative overflow-hidden rounded-3xl border border-violet-100 bg-gradient-to-br from-violet-600 via-indigo-600 to-sky-600 p-6 text-white shadow-xl shadow-violet-200/40 sm:p-8">
@@ -86,6 +93,15 @@ export function QwenWorkTab({ lang, onOpenWebGuide, onOpenWorksheetsGuide, onOpe
                   className="mt-4 inline-flex items-center rounded-full bg-violet-50 px-3.5 py-1.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
                 >
                   {t('qwenWebViewGuide', lang)}
+                </button>
+              )}
+              {titleKey === 'qwenFeatWorkflowTitle' && onOpenSkillGuide && (
+                <button
+                  type="button"
+                  onClick={onOpenSkillGuide}
+                  className="mt-4 inline-flex items-center rounded-full bg-violet-50 px-3.5 py-1.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
+                >
+                  {t('qwenSkill', lang)}
                 </button>
               )}
             </article>
