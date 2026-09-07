@@ -120,6 +120,14 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   qwenWebPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
   qwenWebSampleAlt: { tc: 'Qwen Work 學科遊戲學習平台效果示例', sc: 'Qwen Work 学科游戏学习平台效果示例', en: 'Qwen Work subject game platform sample' },
   qwenWebViewGuide: { tc: '查看教學', sc: '查看教学', en: 'View tutorial' },
+  qwenWebFilesTitle: { tc: '參考遊戲檔案', sc: '参考游戏档案', en: 'Sample game files' },
+  qwenWebFilesIntro: {
+    tc: '以下為獨立 HTML 遊戲，可供下載後放入對應科目資料夾作參考。',
+    sc: '以下为独立 HTML 游戏，可供下载后放入对应科目资料夹作参考。',
+    en: 'Download these standalone HTML games and add them to the matching subject folders for reference.',
+  },
+  qwenWebFileBubbles: { tc: 'Ionic Bubbles 離子泡泡', sc: 'Ionic Bubbles 离子泡泡', en: 'Ionic Bubbles' },
+  qwenWebFileSnake: { tc: 'Math Snake 數學貪食蛇', sc: 'Math Snake 数学贪食蛇', en: 'Math Snake' },
   qwenWorksheets: { tc: '分層工作紙', sc: '分层工作纸', en: 'Differentiated Worksheets' },
   qwenWorksheetsIntro: {
     tc: '把參考工作紙與教科書上載到 Qwen Work，再貼上提示詞，即可生成基礎程度與進階程度的分層工作紙，版式會對齊原有工作紙與課本內容。',

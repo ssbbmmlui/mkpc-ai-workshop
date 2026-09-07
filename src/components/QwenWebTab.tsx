@@ -1,7 +1,17 @@
-import { ExternalLink, Globe } from 'lucide-react';
+import { Download, ExternalLink, Globe } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
 import { assetUrl } from '../assetUrl';
+
+async function blobDownload(url: string, filename: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 
 export const QWEN_WEB_PROMPT = `我是一名學校教學統籌主任，請幫我搭建一個公開的「學科遊戲學習平台」靜態網站。完成後請發布上線，並提供一個公網訪問網址。
 
@@ -106,6 +116,33 @@ export function QwenWebTab({ lang }: Props) {
             alt={t('qwenWebSampleAlt', lang)}
             className="h-auto w-full max-w-full"
           />
+        </div>
+      </div>
+
+      <div>
+        <h3 className="section-title">{t('qwenWebFilesTitle', lang)}</h3>
+        <div className="step-card space-y-3">
+          <p className="text-sm leading-relaxed text-slate-600">{t('qwenWebFilesIntro', lang)}</p>
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() =>
+                blobDownload(assetUrl('files/qwen-work/ionic-bubbles.html'), 'ionic-bubbles.html')
+              }
+              className="inline-flex items-center gap-2 rounded-xl bg-violet-50 px-4 py-2.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
+            >
+              <Download size={16} />
+              {t('qwenWebFileBubbles', lang)}
+            </button>
+            <button
+              type="button"
+              onClick={() => blobDownload(assetUrl('files/qwen-work/math-snake.html'), 'math-snake.html')}
+              className="inline-flex items-center gap-2 rounded-xl bg-violet-50 px-4 py-2.5 text-sm font-semibold text-violet-700 ring-1 ring-violet-100 transition hover:bg-violet-100"
+            >
+              <Download size={16} />
+              {t('qwenWebFileSnake', lang)}
+            </button>
+          </div>
         </div>
       </div>
     </div>
