@@ -2,8 +2,11 @@ import { Presentation } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
 import { assetUrl } from '../assetUrl';
+import { promptForLang } from '../promptLang';
 
 const PPT_PROMPT = `生成一個ppt簡報，內容是關於香港大館`;
+
+const PPT_PROMPT_EN = `Generate a PowerPoint presentation. The content is about Tai Kwun in Hong Kong.`;
 
 interface Props {
   lang: Lang;
@@ -30,7 +33,7 @@ export function PresentationTab({ lang }: Props) {
               <span className="font-medium text-slate-700">{t('pptStep2', lang)}</span>
             </div>
           </div>
-          <PromptBlock text={PPT_PROMPT} label={t('copyPrompt', lang)} />
+          <PromptBlock text={promptForLang(lang, PPT_PROMPT, PPT_PROMPT_EN)} label={t('copyPrompt', lang)} />
           <img
             src={assetUrl('images/presentation/ppt1.png')}
             alt="Presentation generation steps"

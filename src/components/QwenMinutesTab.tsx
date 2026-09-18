@@ -2,6 +2,7 @@ import { ClipboardList, ExternalLink, FileText } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
 import { assetUrl } from '../assetUrl';
+import { promptForLang } from '../promptLang';
 
 export const QWEN_MINUTES_PROMPT = `mp4為會議時的錄音
 word檔為會議記錄的temlpate
@@ -34,8 +35,9 @@ interface Props {
 }
 
 export function QwenMinutesTab({ lang }: Props) {
-  const lessonPrompt = lang === 'en' ? QWEN_LESSON_PLAN_PROMPT_EN : QWEN_LESSON_PLAN_PROMPT;
-  const schemePrompt = lang === 'en' ? QWEN_SCHEME_PROMPT_EN : QWEN_SCHEME_PROMPT;
+  const minutesPrompt = promptForLang(lang, QWEN_MINUTES_PROMPT, QWEN_MINUTES_PROMPT_EN);
+  const lessonPrompt = promptForLang(lang, QWEN_LESSON_PLAN_PROMPT, QWEN_LESSON_PLAN_PROMPT_EN);
+  const schemePrompt = promptForLang(lang, QWEN_SCHEME_PROMPT, QWEN_SCHEME_PROMPT_EN);
 
   return (
     <div className="space-y-8 fade-in-up">
@@ -80,13 +82,7 @@ export function QwenMinutesTab({ lang }: Props) {
 
       <div>
         <h3 className="section-title">{t('qwenMinutesPromptTitle', lang)}</h3>
-        <p className="mb-3 text-sm leading-relaxed text-slate-600">{t('qwenMinutesPromptNote', lang)}</p>
-        <PromptBlock text={QWEN_MINUTES_PROMPT} label={t('copyPrompt', lang)} maxHeight="240px" />
-      </div>
-
-      <div>
-        <h3 className="section-title">{t('qwenMinutesPromptEnTitle', lang)}</h3>
-        <PromptBlock text={QWEN_MINUTES_PROMPT_EN} label={t('copyPrompt', lang)} maxHeight="240px" />
+        <PromptBlock text={minutesPrompt} label={t('copyPrompt', lang)} maxHeight="240px" />
       </div>
 
       <div>

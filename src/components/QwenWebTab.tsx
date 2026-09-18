@@ -2,6 +2,7 @@ import { Download, ExternalLink, Globe } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
 import { assetUrl } from '../assetUrl';
+import { promptForLang } from '../promptLang';
 
 async function blobDownload(url: string, filename: string) {
   const res = await fetch(url);
@@ -57,6 +58,50 @@ export const QWEN_WEB_PROMPT = `我是一名學校教學統籌主任，請幫我
 自我驗證；
 最後請將網站發布上線，並提供公網訪問網址。`;
 
+export const QWEN_WEB_PROMPT_EN = `I am a school curriculum coordinator. Please build a public static website for a “Subject Game Learning Platform”. When it is finished, publish it and give me a public URL.
+
+Layout
+Show a rounded logo in the top left with the text 【School name】;
+below it, show the main title 【Subject Game Learning Platform】.
+In the top right, add two switches:
+
+Chinese/English toggle: the whole site updates immediately after switching;
+Preview size: choose Phone / iPad / Computer.
+(When Phone or iPad is selected, the whole site should appear inside a device frame 390px / 820px wide.)
+The main area is a subject grid, in this order:
+
+【Chinese, Mathematics, English, Physics, Chemistry, Biology, Geography, Politics, History, Music】
+
+Each subject card must include:
+
+a theme colour;
+the subject name (Chinese and English);
+the number of games for that subject;
+a cute animal avatar (inline SVG only; do not use external images);
+clicking a subject opens that subject’s game list. The list page must have a “Back to home” button at the top.
+Games are shown as cards, including:
+
+game name;
+target year group;
+one-line how-to-play;
+a “Play” button;
+if a subject has no games yet, show a dashed-border empty state.
+Overall style
+Bright and cute;
+mainly light purple;
+simple and tidy;
+reflect the school colour 【blue】;
+text contrast must be sufficient;
+buttons should be easy to tap.
+Technical requirements
+Each game is a standalone HTML file. The site is only an entry platform and must not change the games themselves.
+Use a “one folder per subject + one game list file” structure, so when I add games later I only put the HTML file in the subject folder and add one line to the game list, without changing any component code.
+When finished, please run
+type checking;
+a production build;
+self-verification;
+then publish the site and provide a public URL.`;
+
 interface Props {
   lang: Lang;
 }
@@ -105,7 +150,7 @@ export function QwenWebTab({ lang }: Props) {
 
       <div>
         <h3 className="section-title">{t('qwenWebPromptTitle', lang)}</h3>
-        <PromptBlock text={QWEN_WEB_PROMPT} label={t('copyPrompt', lang)} maxHeight="360px" />
+        <PromptBlock text={promptForLang(lang, QWEN_WEB_PROMPT, QWEN_WEB_PROMPT_EN)} label={t('copyPrompt', lang)} maxHeight="360px" />
       </div>
 
       <div>

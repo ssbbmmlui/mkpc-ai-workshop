@@ -115,7 +115,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   qwenWebStepsTitle: { tc: '學科遊戲學習平台步驟', sc: '学科游戏学习平台步骤', en: 'Subject game platform steps' },
   qwenWebStep1: { tc: '開啟 Qwen Work', sc: '开启 Qwen Work', en: 'Open Qwen Work' },
-  qwenWebStep2: { tc: '貼上參考提示詞，可把【學校名】改成自己的學校', sc: '贴上参考提示词，可把【学校名】改成自己的学校', en: 'Paste the reference prompt, and replace 【學校名】 with your school name' },
+  qwenWebStep2: { tc: '貼上參考提示詞，可把【學校名】改成自己的學校', sc: '贴上参考提示词，可把【学校名】改成自己的学校', en: 'Paste the reference prompt, and replace 【School name】 with your school name' },
   qwenWebStep3: { tc: '等待網站生成並發布，取得公網網址', sc: '等待网站生成并发布，取得公网网址', en: 'Wait for the site to generate and publish, then copy the public URL' },
   qwenWebPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
   qwenWebSampleAlt: { tc: 'Qwen Work 學科遊戲學習平台效果示例', sc: 'Qwen Work 学科游戏学习平台效果示例', en: 'Qwen Work subject game platform sample' },
