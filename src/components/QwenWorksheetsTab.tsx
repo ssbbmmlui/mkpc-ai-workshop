@@ -2,6 +2,7 @@ import { Download, ExternalLink, FileText } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
 import { Lang, t } from '../i18n';
 import { assetUrl } from '../assetUrl';
+import { promptForLang } from '../promptLang';
 
 export const QWEN_WORKSHEETS_PROMPT = `i would like you to create differentiated worksheets.
 @12 Reacting masses_Homework_Student.docx this is the normal level.
@@ -14,6 +15,18 @@ Ensure all the format of the chemical equations and values align accurately with
 Provide the complete, fully drafted text for both worksheets so they are ready for classroom use.
 
 please create a basic (foundation) and an advanced level worksheet using the same font and style based on @12 Reacting masses_Homework_Student.docx`;
+
+export const QWEN_WORKSHEETS_PROMPT_ZH = `請幫我製作分層工作紙。
+@12 Reacting masses_Homework_Student.docx 這是普通程度。
+@cbte12_e_cleaned.pdf 這是教科書
+
+請維持與 @12 Reacting masses_Homework_Student.docx 完全相同的字體、格式、標題版面、題號及視覺風格。
+
+請確保化學方程式與數值的格式準確對齊教科書 @cbte12_e_cleaned.pdf 的內容。
+
+請提供兩份完整、可直接用於課堂的工作紙全文。
+
+請根據 @12 Reacting masses_Homework_Student.docx 的字體與風格，製作一份基礎（foundation）及一份進階程度工作紙。`;
 
 async function blobDownload(url: string, filename: string) {
   const res = await fetch(url);
@@ -105,7 +118,7 @@ export function QwenWorksheetsTab({ lang }: Props) {
 
       <div>
         <h3 className="section-title">{t('qwenWorksheetsPromptTitle', lang)}</h3>
-        <PromptBlock text={QWEN_WORKSHEETS_PROMPT} label={t('copyPrompt', lang)} maxHeight="360px" />
+        <PromptBlock text={promptForLang(lang, QWEN_WORKSHEETS_PROMPT_ZH, QWEN_WORKSHEETS_PROMPT)} label={t('copyPrompt', lang)} maxHeight="360px" />
       </div>
 
       <div>
