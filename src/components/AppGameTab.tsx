@@ -89,6 +89,17 @@ export function AppGameTab({ lang }: Props) {
         <PromptBlock text={promptForLang(lang, SNAKE_PROMPT, SNAKE_PROMPT_EN)} label={t('copyPrompt', lang)} />
       </div>
 
+      <div>
+        <h3 className="section-title">{t('tryQwenSnake', lang)}</h3>
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          <iframe
+            src={assetUrl('apps/qwen-snake.html')}
+            title="Qwen Snake"
+            className="h-[980px] w-full border-0"
+          />
+        </div>
+      </div>
+
       {/* Playable game */}
       <div>
         <h3 className="section-title">{t('tryGame', lang)}</h3>
