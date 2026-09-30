@@ -54,6 +54,17 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   geminiStep3: { tc: '填上名稱、提示詞及加入知識來源', sc: '填上名称、提示词及加入知识来源', en: 'Fill in name, prompt, and add knowledge source' },
   geminiStepsTitle: { tc: '建立Gem的步驟（以考考我為例子）', sc: '建立Gem的步骤（以考考我为例子）', en: 'Steps to Create a Gem (using "Quiz Me" as example)' },
   studyPartnerPrompt: { tc: 'Gemini考考我 提示詞', sc: 'Gemini考考我 提示词', en: 'Gemini "Quiz Me" Prompt' },
+  quizMeIntro: {
+    tc: '考考我是一位出題導師。把年級、課題，以及可選的筆記或工作紙放進 Gem，它會按程度出選擇題，讓學生自己作答，而不是直接公布答案。適合溫習和課後小測。',
+    sc: '考考我是一位出题导师。把年级、课题，以及可选的笔记或工作纸放进 Gem，它会按程度出选择题，让学生自己作答，而不是直接公布答案。适合温习和课后小测。',
+    en: 'Quiz Me is a quizzing tutor. Give it a grade level, a topic, and an optional note or worksheet, and it builds a multiple-choice quiz at the right level so students answer for themselves instead of being handed the solution. It works well for revision and short checks.',
+  },
+  studyPartnerTitle: { tc: 'Study Partner 提示詞', sc: 'Study Partner 提示词', en: 'Study Partner Prompt' },
+  studyPartnerIntro: {
+    tc: 'Study Partner 是一位蘇格拉底式導師。學生提出問題時，它不會直接給答案，而是先了解年級和目標，再用提問引導學生自己思考、找出卡住的地方，並一起訂下練習計劃。適合輔導功課，避免學生只複製 AI 的答案。',
+    sc: 'Study Partner 是一位苏格拉底式导师。学生提出问题时，它不会直接给答案，而是先了解年级和目标，再用提问引导学生自己思考、找出卡住的地方，并一起订下练习计划。适合辅导功课，避免学生只复制 AI 的答案。',
+    en: 'Study Partner is a Socratic tutor. When a student asks a question, it does not give the answer. It first learns their grade and goal, then uses questions to draw out their thinking, find where they are stuck, and agree a short plan. Use it for homework support when you do not want students to copy an AI answer.',
+  },
   knowledgeSource: { tc: '知識來源（供參考用）', sc: '知识来源（供参考用）', en: 'Knowledge Source (for reference)' },
   samplePrompt: { tc: '使用提示詞（供參考）', sc: '使用提示词（供参考）', en: 'Sample Prompt (for reference)' },
   imageGenSteps: { tc: '圖片生成步驟', sc: '图片生成步骤', en: 'Image Generation Steps' },
