@@ -1,25 +1,32 @@
 import { ExternalLink, Wand2 } from 'lucide-react';
 import { PromptBlock } from './PromptBlock';
+import { assetUrl } from '../assetUrl';
 import { Lang, t } from '../i18n';
 import { promptForLang } from '../promptLang';
 
 export const QWEN_SKILL_SAVE_PROMPT =
-  '幫我整理以上對話重點並分析我的習慣和需求，保存成skill，名稱是【數學分層工作紙】';
+  '請整理上述對話的重點，並分析本人的習慣與需求，建立一份可上載至 Qwen Work 的 SKILL.md。Skill 名稱為【數學分層工作紙】。請於檔案開頭以 YAML 寫明 name 與 description。';
 
 export const QWEN_SKILL_SAVE_PROMPT_EN =
-  'Please summarise the key points of the conversation above, analyse my habits and needs, and save them as a skill named 【數學分層工作紙】.';
+  'Please summarise the key points of the conversation above, analyse my habits and needs, and create a SKILL.md file that can be uploaded to Qwen Work. Name the skill 【數學分層工作紙】. Write the name and description in YAML at the top of the file.';
 
 export const QWEN_SKILL_TEST_PROMPT =
-  '建立skill後自動用一句新題目跑一次，並用一句模糊嘅話測試會唔會觸發。';
+  '建立 Skill 後，請先以一道新題目自動執行一次，再以一句含糊的語句測試是否會觸發。';
 
 export const QWEN_SKILL_TEST_PROMPT_EN =
   'After creating the skill, automatically run it once with a new question, then test with a vague sentence whether it will trigger.';
 
 export const QWEN_SKILL_UPDATE_PROMPT =
-  '更新skill【數學分層工作紙】：要點如下：1.XXXX 2.XXXX';
+  '請更新 Skill【數學分層工作紙】，要點如下：1.XXXX 2.XXXX';
 
 export const QWEN_SKILL_UPDATE_PROMPT_EN =
-  'Update skill 【數學分層工作紙】 with these points: 1.XXXX 2.XXXX';
+  'Please update the skill 【數學分層工作紙】 with these points: 1.XXXX 2.XXXX';
+
+const SKILL_UPLOAD_STEPS = [
+  { step: 1, image: 'images/qwen-work/skill-add.png' },
+  { step: 2, image: 'images/qwen-work/skill-upload.png' },
+  { step: 3, image: 'images/qwen-work/skill-use.png' },
+] as const;
 
 interface Props {
   lang: Lang;
@@ -95,6 +102,31 @@ export function QwenSkillTab({ lang }: Props) {
       <div>
         <h3 className="section-title">{t('qwenSkillUpdatePromptTitle', lang)}</h3>
         <PromptBlock text={promptForLang(lang, QWEN_SKILL_UPDATE_PROMPT, QWEN_SKILL_UPDATE_PROMPT_EN)} label={t('copyPrompt', lang)} />
+      </div>
+
+      <div>
+        <h3 className="section-title">{t('qwenSkillUploadTitle', lang)}</h3>
+        <p className="mb-4 leading-relaxed text-slate-600">{t('qwenSkillUploadIntro', lang)}</p>
+        <div className="space-y-6">
+          {SKILL_UPLOAD_STEPS.map(({ step, image }) => {
+            const caption = t(`qwenSkillUploadStep${step}`, lang);
+            return (
+              <figure key={step} className="step-card">
+                <figcaption className="mb-3 flex items-start gap-2">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-bold text-violet-700">
+                    {step}
+                  </span>
+                  <span className="font-medium leading-relaxed text-slate-700">{caption}</span>
+                </figcaption>
+                <img
+                  src={assetUrl(image)}
+                  alt={caption}
+                  className="h-auto w-full max-w-3xl rounded-lg border border-slate-200"
+                />
+              </figure>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
