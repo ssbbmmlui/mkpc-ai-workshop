@@ -280,6 +280,11 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     sc: '安装完成后，开启「My skills」，找到该 Skill，按「Use」即可使用。',
     en: 'After installation, open My skills, find the skill, and click Use.',
   },
+  qwenSkillUploadStep4: {
+    tc: '建立新任務，先上載參考檔案。在輸入欄開啟 Skills，選取已安裝的 Skill，再輸入簡短要求，例如「幫我製作化學分層工作紙」。選取後會顯示該 Skill 的描述，確認無誤即可送出，以測試 Skill 是否生效。',
+    sc: '建立新任务，先上传参考文件。在输入栏开启 Skills，选取已安装的 Skill，再输入简短要求，例如「帮我制作化学分层工作纸」。选取后会显示该 Skill 的描述，确认无误即可送出，以测试 Skill 是否生效。',
+    en: 'Start a new task and upload the reference files. In the composer, open Skills, select the installed skill, then type a short request such as “幫我製作化學分層工作紙”. The skill description appears after you select it. Send the message to check that the skill is working.',
+  },
   sidebarNav: { tc: '導覽', sc: '导览', en: 'Navigation' },
   openMenu: { tc: '開啟選單', sc: '开启选单', en: 'Open menu' },
   closeMenu: { tc: '關閉選單', sc: '关闭选单', en: 'Close menu' },

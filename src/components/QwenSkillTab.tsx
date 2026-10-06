@@ -26,6 +26,7 @@ const SKILL_UPLOAD_STEPS = [
   { step: 1, image: 'images/qwen-work/skill-add.png' },
   { step: 2, image: 'images/qwen-work/skill-upload.png' },
   { step: 3, image: 'images/qwen-work/skill-use.png' },
+  { step: 4, image: 'images/qwen-work/skill-test.png' },
 ] as const;
 
 interface Props {
