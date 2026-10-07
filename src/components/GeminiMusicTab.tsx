@@ -3,6 +3,9 @@ import { PromptBlock } from './PromptBlock';
 import { assetUrl } from '../assetUrl';
 import { Lang, t } from '../i18n';
 
+const LYRICS_GEM_URL =
+  'https://gemini.google.com/gem/1Sbl0Fkjs_oplBphYPKEjLG40fSe5qX1r?usp=sharing';
+
 const MUSIC_PROMPT = `Sodium, golden yellow flame
 Potassium, lilac flame
 Calcium, brick-red flame
@@ -28,15 +31,26 @@ export function GeminiMusicTab({ lang }: Props) {
             <p className="mt-3 rounded-xl bg-amber-50 px-3.5 py-2.5 text-sm leading-relaxed text-amber-900 ring-1 ring-amber-100">
               {t('geminiMusicAgeNote', lang)}
             </p>
-            <a
-              href="https://gemini.google.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3.5 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-100 transition hover:bg-sky-100"
-            >
-              <ExternalLink size={14} />
-              {t('openGemini', lang)}
-            </a>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a
+                href={LYRICS_GEM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700"
+              >
+                <ExternalLink size={14} />
+                {t('geminiMusicLyricsOpen', lang)}
+              </a>
+              <a
+                href="https://gemini.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3.5 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-100 transition hover:bg-sky-100"
+              >
+                <ExternalLink size={14} />
+                {t('openGemini', lang)}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -58,6 +72,22 @@ export function GeminiMusicTab({ lang }: Props) {
             alt={t('geminiMusicShotAlt', lang)}
             className="h-auto w-full max-w-3xl rounded-lg border border-slate-200"
           />
+        </div>
+      </div>
+
+      <div>
+        <h3 className="section-title">{t('geminiMusicLyricsTitle', lang)}</h3>
+        <div className="step-card space-y-3">
+          <p className="leading-relaxed text-slate-600">{t('geminiMusicLyricsIntro', lang)}</p>
+          <a
+            href={LYRICS_GEM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 break-all rounded-full bg-sky-50 px-3.5 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-100 transition hover:bg-sky-100"
+          >
+            <ExternalLink size={14} className="shrink-0" />
+            AI generated music on Gemini
+          </a>
         </div>
       </div>
 

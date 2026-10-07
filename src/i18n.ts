@@ -70,6 +70,13 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     sc: '「Music」表示正在使用音乐生成。「Vocals」选人声或纯音乐，「Genre」选曲风。时钟图标的「Standard」与曲长有关，官方说明歌曲最长约 3 分钟。Thinking 是思考程度，麦克风可用语音输入，箭头送出。左方「+」可加入图片，Gemini 可按画面感觉配乐。',
     en: 'Music means you are in music generation. Vocals chooses sung vocals or an instrumental, and Genre chooses the style. Standard, with the clock icon, is a length setting; Google says tracks can run up to about 3 minutes. Thinking sets how much reasoning to use, the microphone is for voice input, and the arrow sends the prompt. The + button can add a photo so Gemini can score the scene.',
   },
+  geminiMusicLyricsTitle: { tc: '生成歌詞', sc: '生成歌词', en: 'Write the lyrics' },
+  geminiMusicLyricsIntro: {
+    tc: '先開啟這個 Gem 寫歌詞，名稱是 “AI generated music on Gemini”。寫好後，把歌詞貼進音樂生成的輸入框，再補上曲風，例如圖中的中速 pop rap。',
+    sc: '先开启这个 Gem 写歌词，名称是 “AI generated music on Gemini”。写好后，把歌词贴进音乐生成的输入框，再补上曲风，例如图中的中速 pop rap。',
+    en: 'Open this Gem to write the lyrics. Its name is “AI generated music on Gemini”. Then paste the lyrics into the music box and add a style, such as the moderate-tempo pop rap in the screenshot.',
+  },
+  geminiMusicLyricsOpen: { tc: '開啟歌詞 Gem', sc: '开启歌词 Gem', en: 'Open the lyrics Gem' },
   geminiMusicPromptTitle: { tc: '圖中的提示詞', sc: '图中的提示词', en: 'The prompt in the screenshot' },
   geminiMusicPromptNote: {
     tc: '以下是畫面中已完整顯示的歌詞和曲風，可直接複製。原圖最後還有 “bright high-” ，但該行被截斷，所以這裡沒有補寫。',
