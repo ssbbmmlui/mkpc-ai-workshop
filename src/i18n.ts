@@ -133,11 +133,22 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     en: 'Paste the full prompt. The default name is PlayLab. Do not add a school name, school domain, or badge, and do not ask it to build learning games yet.',
   },
   qwenWebStep3: {
-    tc: '網站完成後，對照下方示範：17 個科目、空狀態，以及工具科的分數測試頁。',
-    sc: '网站完成后，对照下方示范：17 个科目、空状态，以及工具科的分数测试页。',
-    en: 'When the site is ready, compare it with the demo below: 17 subjects, empty states, and the score test page under Tools.',
+    tc: '在 Web preview 確認 PlayLab 首頁後，按 Publish 公開網站，再對照下方已上線的示範。',
+    sc: '在 Web preview 确认 PlayLab 首页后，按 Publish 公开网站，再对照下方已上线的示范。',
+    en: 'In Web preview, check the PlayLab home page, click Publish to make it public, then compare it with the live demo below.',
   },
   qwenWebPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
+  qwenWebResultTitle: { tc: '預覽與發布', sc: '预览与发布', en: 'Preview and publish' },
+  qwenWebResultStep1: {
+    tc: '提示詞完成後，看右側 Web preview。首頁應為 PlayLab，並可看到科目卡、語言切換「中文」，以及 Start Playing。',
+    sc: '提示词完成后，看右侧 Web preview。首页应为 PlayLab，并可看到科目卡、语言切换「中文」，以及 Start Playing。',
+    en: 'When the prompt finishes, look at Web preview on the right. The home page should be PlayLab, with subject cards, a 中文 language toggle, and Start Playing.',
+  },
+  qwenWebResultStep2: {
+    tc: '預覽無誤後，按右上角紅框標示的「Publish」。在視窗中保持「Anyone with the link」，再按紅框標示的「Publish now」，網站即可公開。',
+    sc: '预览无误后，按右上角红框标示的「Publish」。在视窗中保持「Anyone with the link」，再按红框标示的「Publish now」，网站即可公开。',
+    en: 'When the preview looks right, click Publish at the top right (highlighted). Leave access as Anyone with the link, then click Publish now (highlighted) to make the site public.',
+  },
   qwenWebDemoTitle: { tc: '示範網站', sc: '示范网站', en: 'Demonstration' },
   qwenWebDemoIntro: {
     tc: '以下是已上線的互動學習平台，可在頁內瀏覽科目與遊戲，或開啟新分頁。它用來對照平台完成後的樣子；這次提示詞本身仍不要寫入學校名稱。',
