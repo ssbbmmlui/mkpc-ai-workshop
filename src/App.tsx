@@ -3,6 +3,7 @@ import { Languages, Menu } from 'lucide-react';
 import { GeminiHomeTab } from './components/GeminiHomeTab';
 import { GeminiTab } from './components/GeminiTab';
 import { ImageGenTab } from './components/ImageGenTab';
+import { GeminiMusicTab } from './components/GeminiMusicTab';
 import { AppGameTab } from './components/AppGameTab';
 import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
@@ -101,6 +102,7 @@ function App() {
             {activePage === 'gemini' && <GeminiHomeTab lang={lang} />}
             {activePage === 'geminiGem' && <GeminiTab lang={lang} />}
             {activePage === 'image' && <ImageGenTab lang={lang} />}
+            {activePage === 'geminiMusic' && <GeminiMusicTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
             {activePage === 'qwen' && (
