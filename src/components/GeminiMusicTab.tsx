@@ -6,12 +6,72 @@ import { Lang, t } from '../i18n';
 const LYRICS_GEM_URL =
   'https://gemini.google.com/gem/1Sbl0Fkjs_oplBphYPKEjLG40fSe5qX1r?usp=sharing';
 
-const MUSIC_PROMPT = `Sodium, golden yellow flame
+const MUSIC_PROMPT = `[Intro]
+Flame test, name the flame
+Four metals, four colours, sing the same
+
+[Rap Verse 1]
+Three point five, the flame test, heat the sample strong
+Metals and metallic compounds each burn with their own colour song
+Clean the wire, platinum or nichrome, hold it in your hand
+Concentrated hydrochloric acid, moisten the wire and
+Dip it in the crushed sample, lift it to the light
+Non-luminous Bunsen flame, inner blue cone, hottest height
+Put the tip above that cone and watch the colour rise
+The flame colour names the metal, so open up your eyes
+
+[Chorus]
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame
+Sodium, golden yellow flame
 Potassium, lilac flame
 Calcium, brick-red flame
 Copper, bluish green flame
 
-Moderate-tempo modern pop rap with a youthful clear-diction duet, alternating rhythmic rap verses and a repetitive sung chorus.`;
+[Rap Verse 2]
+Read the colour, call the metal, say it loud and clear
+Sodium ions in the fire, golden yellow appears
+Common salt contains those sodium ions, so the flame goes golden yellow
+Potassium ions hit the flame, the lilac starts to glow
+Calcium ions burn brick-red, you know it when you see
+Copper ions burn bluish green, that colour sets them free
+One colour, one metal, lock the four inside your head
+Golden yellow, lilac, brick-red, bluish green, that’s what the flame test said
+
+[Chorus]
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame
+
+[Bridge]
+Golden yellow, sodium
+Lilac, potassium
+Brick-red, calcium
+Bluish green, copper
+Say it again
+
+[Final Chorus]
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame
+
+[Outro]
+Sodium, golden yellow flame
+Potassium, lilac flame
+Calcium, brick-red flame
+Copper, bluish green flame`;
 
 interface Props {
   lang: Lang;
@@ -60,13 +120,7 @@ export function GeminiMusicTab({ lang }: Props) {
           <Music size={22} className="text-sky-500" />
           {t('geminiMusicShotTitle', lang)}
         </h3>
-        <div className="step-card space-y-4">
-          <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed text-slate-600">
-            <li>{t('geminiMusicPoint1', lang)}</li>
-            <li>{t('geminiMusicPoint2', lang)}</li>
-            <li>{t('geminiMusicPoint3', lang)}</li>
-            <li>{t('geminiMusicPoint4', lang)}</li>
-          </ol>
+        <div className="step-card">
           <img
             src={assetUrl('images/gemini/music-composer.png')}
             alt={t('geminiMusicShotAlt', lang)}
@@ -93,8 +147,7 @@ export function GeminiMusicTab({ lang }: Props) {
 
       <div>
         <h3 className="section-title">{t('geminiMusicPromptTitle', lang)}</h3>
-        <p className="mb-3 text-sm leading-relaxed text-slate-600">{t('geminiMusicPromptNote', lang)}</p>
-        <PromptBlock text={MUSIC_PROMPT} label={t('copyPrompt', lang)} />
+        <PromptBlock text={MUSIC_PROMPT} label={t('copyPrompt', lang)} maxHeight="480px" />
       </div>
     </div>
   );
