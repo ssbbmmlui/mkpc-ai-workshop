@@ -164,6 +164,11 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     sc: '平台建成之后，新游戏才是一个独立 HTML，并在目录登录一笔资料。以下文件只作日后加入游戏的参考，不属于这次提示词要生成的内容。',
     en: 'After the platform exists, a new game is one standalone HTML file plus one catalogue entry. These files are only examples for that later step. They are not part of what this prompt should generate.',
   },
+  qwenWebAddGameCaption: {
+    tc: '平台建成後，把單一 HTML 遊戲檔加到對話（圖中為 math-snake.html），再請 AI 加入指定科目，例如輸入 “add this game to mathematics”。AI 會把該遊戲放進數學科，並在目錄登錄一筆資料。',
+    sc: '平台建成后，把单一 HTML 游戏档加到对话（图中为 math-snake.html），再请 AI 加入指定科目，例如输入 “add this game to mathematics”。AI 会把该游戏放进数学科，并在目录登录一笔资料。',
+    en: 'After the platform exists, attach one HTML game file (math-snake.html in the screenshot) and ask the AI to add it to a subject, for example “add this game to mathematics”. The AI places that game in Mathematics and adds one catalogue entry.',
+  },
   qwenWebFileBubbles: { tc: 'Ionic Bubbles 離子泡泡', sc: 'Ionic Bubbles 离子泡泡', en: 'Ionic Bubbles' },
   qwenWebFileSnake: { tc: 'Math Snake 數學貪食蛇', sc: 'Math Snake 数学贪食蛇', en: 'Math Snake' },
   qwenWorksheets: { tc: '分層工作紙', sc: '分层工作纸', en: 'Differentiated Worksheets' },

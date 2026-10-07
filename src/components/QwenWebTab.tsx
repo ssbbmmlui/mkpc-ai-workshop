@@ -148,6 +148,16 @@ export function QwenWebTab({ lang }: Props) {
             </button>
           </div>
         </div>
+        <figure className="step-card mt-4">
+          <figcaption className="mb-3 font-medium leading-relaxed text-slate-700">
+            {t('qwenWebAddGameCaption', lang)}
+          </figcaption>
+          <img
+            src={assetUrl('images/qwen-work/playlab-add-game.png')}
+            alt={t('qwenWebAddGameCaption', lang)}
+            className="h-auto w-full max-w-3xl rounded-lg border border-slate-200"
+          />
+        </figure>
       </div>
     </div>
   );
