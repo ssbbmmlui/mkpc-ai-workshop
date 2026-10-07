@@ -7,6 +7,11 @@ import qwenWebPromptZh from '../prompts/qwen-web-playlab.zh.txt?raw';
 import qwenWebPromptEn from '../prompts/qwen-web-playlab.en.txt?raw';
 
 export const QWEN_WEB_DEMO_URL = 'https://mkpcplay.netlify.app/';
+
+const QWEN_WEB_RESULT_SHOTS = [
+  { step: 1, image: 'images/qwen-work/playlab-preview.png' },
+  { step: 2, image: 'images/qwen-work/playlab-publish.png' },
+] as const;
 export const QWEN_WEB_PROMPT = qwenWebPromptZh.trim();
 export const QWEN_WEB_PROMPT_EN = qwenWebPromptEn.trim();
 
@@ -69,6 +74,30 @@ export function QwenWebTab({ lang }: Props) {
       <div>
         <h3 className="section-title">{t('qwenWebPromptTitle', lang)}</h3>
         <PromptBlock text={promptForLang(lang, QWEN_WEB_PROMPT, QWEN_WEB_PROMPT_EN)} label={t('copyPrompt', lang)} maxHeight="480px" />
+      </div>
+
+      <div>
+        <h3 className="section-title">{t('qwenWebResultTitle', lang)}</h3>
+        <div className="space-y-6">
+          {QWEN_WEB_RESULT_SHOTS.map(({ step, image }) => {
+            const caption = t(`qwenWebResultStep${step}`, lang);
+            return (
+              <figure key={step} className="step-card">
+                <figcaption className="mb-3 flex items-start gap-2">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-bold text-violet-700">
+                    {step}
+                  </span>
+                  <span className="font-medium leading-relaxed text-slate-700">{caption}</span>
+                </figcaption>
+                <img
+                  src={assetUrl(image)}
+                  alt={caption}
+                  className="h-auto w-full max-w-3xl rounded-lg border border-slate-200"
+                />
+              </figure>
+            );
+          })}
+        </div>
       </div>
 
       <div>
