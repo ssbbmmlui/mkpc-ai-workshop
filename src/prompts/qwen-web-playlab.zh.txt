@@ -1,0 +1,222 @@
+# 重建提示詞：互動學習遊戲平台
+
+你是資深全端工程師。請從零建立一個給中學生使用的互動學習遊戲平台。這次只做平台本身：科目目錄、遊戲列表、遊戲播放、雙語介面，以及讓日後的遊戲回報分數。
+
+不要設計、不要實作、也不要在目錄裡列出任何具體學習遊戲。不要寫遊戲玩法、題目、角色、歌曲或關卡。日後新增遊戲時，只需要放入一個 HTML 檔，並在目錄登錄一筆資料。
+
+介面文案用繁體中文，並同時提供英文。程式註解與程式碼使用英文。不要在任何畫面、文案、網域或預設資料裡出現特定學校名稱、學校網域或校徽。平台顯示名稱做成可設定常數，預設叫 **PlayLab**。
+
+平台不需要帳號。成績只存在這部裝置。不要做登入、後端或資料庫。
+
+---
+
+## 1. 產品
+
+PlayLab 是一個網頁平台。學生先選科目，再選遊戲，遊戲在頁面裡的 iframe 中開啟。平台負責瀏覽、說明、全螢幕、語言，以及收集成績。遊戲內容以後另行加入，不在這次範圍。
+
+使用情境：
+
+1. 課堂：學生打開平台，進入指定科目與遊戲。
+2. 家課：學生用手機重玩，成績留在這部裝置。
+3. 本機成績：排行榜可看本學年、所有時間、本月，以及班別（有班別資料時）。
+4. 自主學習：用主題與年級篩選遊戲列表。
+5. 內容擴充：新遊戲是一個靜態 HTML，加上目錄裡的一筆資料。
+
+---
+
+## 2. 技術
+
+- Vite 5 + React 18 + TypeScript（strict）+ React Router 7 + Tailwind CSS 3。
+- 遊戲本體不是 React 元件。路徑是 `public/games/{subject}/{gameId}/index.html`。平台用 iframe 載入。這次不要在這個資料夾放入學習遊戲。
+- 指令：`npm run dev`、`npm run build`、`npm run preview`。
+- 靜態部署。`public/_redirects` 內容：
+
+```
+/*    /index.html   200
+```
+
+---
+
+## 3. 路由
+
+Provider 由外到內：`LanguageProvider` → `GameProvider` → `BrowserRouter`。
+
+| 路徑 | 頁面 |
+| --- | --- |
+| `/` | 首頁，17 個科目入口 |
+| `/subject/:subject` | 該科遊戲列表與篩選 |
+| `/game/:subject/:gameId` | 遊戲說明、iframe、本機成績板 |
+| `/profile` | 這部裝置的遊玩紀錄 |
+
+未知科目仍可開啟科目頁，並顯示空狀態。未知遊戲顯示找不到，並提供返回該科目的連結。
+
+語言存在 `localStorage` 鍵 `playlab-lang`，值 `en` 或 `zh`，預設 `en`。英文介面時切換鈕顯示「中文」，中文介面時顯示「EN」。重新整理後保留語言。
+
+頁首提供語言切換，以及回到主頁的方式。麵包屑：首頁是「主頁」。科目頁是「主頁 / 科目名」。遊戲頁是「主頁 / 科目名 / 遊戲名」。
+
+---
+
+## 4. 文案
+
+用一個字典。`{subject}`、`{count}`、`{total}`、`{class}` 是佔位符。所有學生看得到的文字都要有中英兩版。
+
+頁首：Home／主頁；Profile／個人檔案。
+
+首頁：Welcome to／歡迎來到；PlayLab（兩種語言都用這個名字）；Explore interactive educational games across multiple subjects. Learn while having fun with our collection of engaging activities.／探索涵蓋多個學科的互動教育遊戲。通過我們精心設計的趣味活動，寓學習於遊戲。徽章：Learn. Play. Compete.／學習。遊玩。比拼。按鈕：Start Playing／開始遊戲，捲到科目區。Games marked with a trophy icon have a leaderboard system.／帶有獎盃圖標的遊戲設有排行榜系統。How It Works／使用方式。三步：Choose Subject／選擇科目；Pick a Game／挑選遊戲；Play & Learn／邊玩邊學。
+
+科目：
+
+| id | 英文名 | 中文名 | 英文說明 | 中文說明 |
+| --- | --- | --- | --- | --- |
+| chinese | Chinese | 中文 | Learn Chinese language and culture through interactive games | 通過互動遊戲學習中文語言和文化 |
+| english | English | 英文 | Master English language skills with fun educational games | 通過趣味教育遊戲掌握英語技能 |
+| mathematics | Mathematics | 數學 | Practice math concepts through engaging problem-solving games | 通過解題遊戲實踐數學概念 |
+| physics | Physics | 物理 | Explore physics principles with interactive simulations | 通過互動模擬探索物理原理 |
+| chemistry | Chemistry | 化學 | Discover chemistry through virtual experiments and games | 通過虛擬實驗和遊戲發現化學之美 |
+| biology | Biology | 生物 | Learn about life sciences through interactive experiences | 通過互動體驗學習生命科學 |
+| science | Science | 科學 | Explore science ideas through hands-on experiments and design challenges | 透過動手實驗和設計挑戰探索科學概念 |
+| geography | Geography | 地理 | Explore world geography with maps and location games | 通過地圖和地點遊戲探索世界地理 |
+| history | History | 歷史 | Journey through history with timeline and event games | 通過時間線和事件遊戲穿越歷史 |
+| chinese-history | Chinese History | 中國歷史 | Discover Chinese historical events and cultural heritage | 發現中國歷史事件和文化遺產 |
+| economics | Economics | 經濟 | Learn economic principles through simulation games | 通過模擬遊戲學習經濟原理 |
+| bafs | BAFs | 企會財 | Business, Accounting and Financial Studies games | 企業、會計與財務概論遊戲 |
+| music | Music | 音樂 | Learn music and subject knowledge through rhythm games and educational songs | 透過節奏遊戲和教育歌曲學習音樂及學科知識 |
+| physical-education | Physical Education | 體育 | Learn about health and fitness through active games | 通過活動遊戲學習健康和體適能 |
+| tools | Tools | 工具 | Interactive tools that can be used in classrooms | 可在課堂中使用的互動工具 |
+| aiot | AIoT | AIoT | Explore artificial intelligence and Internet of Things concepts | 探索人工智能和物聯網概念 |
+| others | Others | 其他 | Explore games created by students | 探索由學生創作的遊戲 |
+
+科目頁：`{subject} Games`／`{subject}遊戲`；Explore interactive {subject} games and activities／探索互動{subject}遊戲和活動；Topic:／主題：；Form:／年級：；All／全部；Clear filters／清除篩選；Showing {count} of {total} games／顯示 {count} / {total} 個遊戲；No Games Yet／暫無遊戲；No Games Match Your Filters／沒有符合篩選條件的遊戲；Click to Play／點擊遊玩；Opens in new tab／在新分頁開啟；External／外部。沒有遊戲時，空狀態告訴開發者：把 HTML 放到 `games/{subject}/`。
+
+遊戲頁：Back to {subject}／返回{subject}；Subject／科目；Difficulty／難度；Estimated Time／預計時間；Author／作者；Loading game...／正在載入遊戲...；Open game／開啟遊戲；This game opens in a new tab.／此遊戲將在新分頁中開啟。
+
+排行榜：Leaderboard／排行榜；All time／所有時間；This year／本學年；Academic year／學年；Monthly／本月；All classes／所有班別；Loading scores...／正在載入分數...；本月、本學年、全部時間各有一句「暫無分數，成為第一個」；No scores from class {class} yet.／{class}班暫無分數；View complete leaderboard ({count})／查看完整排行榜 ({count})；Show top 10 only／只顯示前 10 名；Your best／你的最佳成績。標題下說明目前只顯示這部裝置的最佳成績。
+
+個人檔案：Profile／個人檔案；Recent games／最近遊戲；No games played yet／暫未遊玩過任何遊戲；Browse games／瀏覽遊戲。標明紀錄來自此裝置。
+
+---
+
+## 5. 頁面功能
+
+### 5.1 首頁
+
+17 張科目卡，順序固定：中文、英文、數學、物理、化學、生物、科學、地理、歷史、中國歷史、經濟、企會財、音樂、體育、工具、AIoT、其他。每張卡連到 `/subject/{id}`，顯示科目名稱與簡短說明。下方是「使用方式」三步說明。版面在手機與桌面都要能使用，不要橫向溢出。
+
+### 5.2 科目頁
+
+標題與副標。該科有遊戲時顯示篩選：主題、年級、清除、筆數。主題來自 `topic`，去重後排序。年級來自 `difficulty`。這個欄位存的是年級字串，例如 `S1`、`P2`、`S4 - S6`，不是 Easy／Medium／Hard。
+
+遊戲卡顯示標題、說明、主題、時長、年級、作者。有封面就顯示封面。`leaderboard: true` 的標出設有排行榜。有 `externalUrl` 的改為新分頁，並標「外部」。沒有遊戲，或篩選後沒有結果，都要有空狀態。
+
+### 5.3 遊戲頁
+
+可返回該科，可進入全螢幕。頁面顯示標題、說明、科目、難度、時間、作者。
+
+遊戲框置中，不超過螢幕。載入時顯示「正在載入遊戲」。iframe：
+
+- `src` 為 `/games/{subject}/{gameId}/index.html`
+- `sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"`
+- `allowFullScreen`
+- 標題用遊戲名稱
+
+全螢幕：一般瀏覽器用 iframe 原生全螢幕。iOS 與 Safari 用偽全螢幕，滿版顯示，可退出，並鎖定頁面捲動。若目錄標記 `touchSafe: true`，避免觸控捲動干擾遊戲。
+
+離開遊戲頁時，父頁面向 iframe 送 `{ type: 'playlab:requestScore' }`。
+
+有 `externalUrl` 的遊戲不要放 iframe。頁面顯示說明、開啟連結、返回。
+
+`leaderboard: true` 時，iframe 下方顯示排行榜。`leaderboardMode: 'tracks'` 時改用曲目排行榜：同一遊戲可按曲目與難度分開排名，metadata 只供顯示，不另計排名規則。
+
+### 5.4 個人檔案
+
+讀取 localStorage 裡分數大於 0 的紀錄，新的在前。標明這是此裝置的紀錄。列表可分頁，每頁 10 筆：遊戲名連到遊戲頁、科目、本地時間、分數。沒有紀錄時給空狀態與「瀏覽遊戲」。日期用使用者本地日曆日。
+
+---
+
+## 6. 目錄、播放接口、本機成績
+
+### 6.1 目錄資料
+
+`GameProvider` 用一個陣列當目錄，不要做後台。這個陣列是空的，另外只允許一筆測試資料（見 6.4）。不要填入真實遊戲。
+
+```ts
+{
+  id: string
+  title: string
+  titleZh?: string
+  description: string
+  descriptionZh?: string
+  subject: string
+  difficulty: string
+  estimatedTime: string
+  author?: string
+  thumbnail?: string
+  topic?: string
+  externalUrl?: string
+  leaderboard?: boolean
+  leaderboardMode?: 'default' | 'tracks'
+  scoreLabel?: string
+  touchSafe?: boolean
+}
+```
+
+中文介面優先用 `titleZh` 與 `descriptionZh`。提供：全部遊戲、按科目、單款查找、某科主題清單、某科年級清單。
+
+### 6.2 分數訊息
+
+遊戲若要記分，向父頁面送：
+
+```js
+window.parent.postMessage({
+  type: 'playlab:score',
+  subject: '<subject>',
+  gameId: '<gameId>',
+  score: 1234,
+  metadata: {}
+}, '*');
+```
+
+規則：
+
+- `score` 必須是有限數字，愈高愈好。0 或負數不儲存。
+- `subject` 與 `gameId` 必須對得上目前路由。
+- 只接受來自該 iframe `contentWindow` 的訊息。
+- 同一個去重鍵只保留嚴格變高的分數。沒有特別鍵時用 `__default__`。若 metadata 有 `trackId`，去重鍵是 `trackId` 加 `difficulty`。
+- 遊戲應聽 `playlab:requestScore`、`pagehide`、`beforeunload`。不要把切換分頁當成結束。
+- metadata 不參與排名，只供曲目排行榜顯示。
+
+localStorage 鍵 `playlab-scores` 是追加陣列，每筆有 `id`、`subject`、`gameId`、`score`、`metadata`、`createdAt`。不要做刪除或修改分數的介面。分數寫入集中在一個函式。
+
+### 6.3 排行榜
+
+可切換本學年、所有時間、本月。選本學年時可選學年。學年以香港時間計算，9 月 1 日到次年 8 月 31 日，從 2025–2026 列到目前學年。本月用使用者本地月份。
+
+班別從顯示名稱用 `\b([1-6][A-Z])\b` 抽出，例如 `5E`。本機紀錄沒有這種名字時，不顯示班別篩選。
+
+預設前 10 名，可展開全部。同分時較早的在前。自己的最佳成績若不在列表中，底部另顯示一列。空狀態依期間與班別換文案。資料只來自這部裝置。
+
+### 6.4 唯一允許的測試頁
+
+為了驗收播放頁與分數接口，可以做一個沒有學習內容的佔位頁，放在 `public/games/tools/score-check/index.html`。畫面上只有平台名稱、一個數字，以及「加 10 分」「送出分數」兩個按鈕。按下送出就依照第 6.2 節送出目前數字。目錄裡只登錄這一筆，科目 `tools`，`leaderboard: true`。不要把它包裝成教學遊戲，也不要再加第二個遊戲。
+
+---
+
+## 7. 實作順序
+
+1. 建立專案、路由、雙語字典、空的遊戲目錄。
+2. 完成頁首、首頁、科目頁、遊戲頁、全螢幕、本機分數、排行榜、個人檔案。
+3. 只加入第 6.4 節的分數測試頁，確認送分後個人檔案與該頁排行榜會更新。
+
+不要建立學習遊戲。不要做帳號或後端。
+
+---
+
+## 8. 驗收
+
+- 17 個科目卡都在，中英切換後重新整理仍然保留語言。
+- 沒有遊戲的科目顯示空狀態。篩選無結果時有另一個空狀態。
+- 桌面與手機寬度下，首頁、科目頁、遊戲頁沒有橫向溢出。觸控裝置能進入全螢幕並退出。
+- 分數測試頁送出分數後，個人檔案出現一筆，遊戲頁下方出現本機最佳成績。較低分不覆蓋最佳，較高分會更新。
+- 除了那一個分數測試頁，`public/games` 裡沒有其他遊戲。
+- 全站沒有特定學校名稱、學校郵箱網域或校徽。
+- `npm run build` 成功。

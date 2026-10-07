@@ -1,0 +1,222 @@
+# Rebuild prompt: interactive learning-game platform
+
+You are a senior full-stack engineer. Build from scratch an interactive learning-game platform for secondary students. This pass covers only the platform itself: the subject catalogue, the game list, game playback, a bilingual interface, and a way for future games to report scores.
+
+Do not design, implement, or list any specific learning game in the catalogue. Do not write gameplay, questions, characters, songs, or levels. When a game is added later, it only needs one HTML file plus one catalogue entry.
+
+Interface copy is in Traditional Chinese and English. Code comments and source code are in English. Do not show a specific school name, school domain, or school badge on any screen, in any copy, in any domain, or in default data. Make the display name a configurable constant. The default name is **PlayLab**.
+
+The platform does not need accounts. Scores exist only on this device. Do not build login, a backend, or a database.
+
+---
+
+## 1. Product
+
+PlayLab is a website. A student chooses a subject, then a game. The game opens in an iframe on the page. The platform handles browsing, instructions, full screen, language, and collecting scores. Game content is added later and is out of scope this time.
+
+Situations:
+
+1. Class: a student opens the platform and goes to the assigned subject and game.
+2. Homework: a student replays on a phone. The score stays on that device.
+3. On-device scores: the leaderboard can show this academic year, all time, this month, and class (when class data exists).
+4. Independent study: filter the game list by topic and year group.
+5. Adding content: a new game is one static HTML file plus one catalogue entry.
+
+---
+
+## 2. Technology
+
+- Vite 5 + React 18 + TypeScript (strict) + React Router 7 + Tailwind CSS 3.
+- A game is not a React component. Its path is `public/games/{subject}/{gameId}/index.html`. The platform loads it in an iframe. Do not put learning games in this folder this time.
+- Scripts: `npm run dev`, `npm run build`, `npm run preview`.
+- Static hosting. `public/_redirects` contains:
+
+```
+/*    /index.html   200
+```
+
+---
+
+## 3. Routes
+
+Providers, outer to inner: `LanguageProvider` → `GameProvider` → `BrowserRouter`.
+
+| Path | Page |
+| --- | --- |
+| `/` | Home, with 17 subject entries |
+| `/subject/:subject` | That subject’s game list and filters |
+| `/game/:subject/:gameId` | Game details, iframe, and on-device scoreboard |
+| `/profile` | Play history on this device |
+
+An unknown subject still opens the subject page and shows an empty state. An unknown game says it cannot be found and links back to that subject.
+
+Language is stored in `localStorage` under `playlab-lang`, with values `en` or `zh`. The default is `en`. In English the toggle shows 「中文」. In Chinese it shows 「EN」. The choice survives a reload.
+
+The header has a language toggle and a way back to the home page. Breadcrumbs: home is 「主頁」. A subject page is 「主頁 / subject name」. A game page is 「主頁 / subject name / game name」.
+
+---
+
+## 4. Copy
+
+Use one dictionary. `{subject}`, `{count}`, `{total}`, and `{class}` are placeholders. Every string a student can see needs both Chinese and English.
+
+Header: Home／主頁; Profile／個人檔案.
+
+Home: Welcome to／歡迎來到; PlayLab (use this name in both languages); Explore interactive educational games across multiple subjects. Learn while having fun with our collection of engaging activities.／探索涵蓋多個學科的互動教育遊戲。通過我們精心設計的趣味活動，寓學習於遊戲。 Badge: Learn. Play. Compete.／學習。遊玩。比拼。 Button: Start Playing／開始遊戲, scrolling to the subject area. Games marked with a trophy icon have a leaderboard system.／帶有獎盃圖標的遊戲設有排行榜系統。 How It Works／使用方式。 Three steps: Choose Subject／選擇科目; Pick a Game／挑選遊戲; Play & Learn／邊玩邊學。
+
+Subjects:
+
+| id | English name | Chinese name | English description | Chinese description |
+| --- | --- | --- | --- | --- |
+| chinese | Chinese | 中文 | Learn Chinese language and culture through interactive games | 通過互動遊戲學習中文語言和文化 |
+| english | English | 英文 | Master English language skills with fun educational games | 通過趣味教育遊戲掌握英語技能 |
+| mathematics | Mathematics | 數學 | Practice math concepts through engaging problem-solving games | 通過解題遊戲實踐數學概念 |
+| physics | Physics | 物理 | Explore physics principles with interactive simulations | 通過互動模擬探索物理原理 |
+| chemistry | Chemistry | 化學 | Discover chemistry through virtual experiments and games | 通過虛擬實驗和遊戲發現化學之美 |
+| biology | Biology | 生物 | Learn about life sciences through interactive experiences | 通過互動體驗學習生命科學 |
+| science | Science | 科學 | Explore science ideas through hands-on experiments and design challenges | 透過動手實驗和設計挑戰探索科學概念 |
+| geography | Geography | 地理 | Explore world geography with maps and location games | 通過地圖和地點遊戲探索世界地理 |
+| history | History | 歷史 | Journey through history with timeline and event games | 通過時間線和事件遊戲穿越歷史 |
+| chinese-history | Chinese History | 中國歷史 | Discover Chinese historical events and cultural heritage | 發現中國歷史事件和文化遺產 |
+| economics | Economics | 經濟 | Learn economic principles through simulation games | 通過模擬遊戲學習經濟原理 |
+| bafs | BAFs | 企會財 | Business, Accounting and Financial Studies games | 企業、會計與財務概論遊戲 |
+| music | Music | 音樂 | Learn music and subject knowledge through rhythm games and educational songs | 透過節奏遊戲和教育歌曲學習音樂及學科知識 |
+| physical-education | Physical Education | 體育 | Learn about health and fitness through active games | 通過活動遊戲學習健康和體適能 |
+| tools | Tools | 工具 | Interactive tools that can be used in classrooms | 可在課堂中使用的互動工具 |
+| aiot | AIoT | AIoT | Explore artificial intelligence and Internet of Things concepts | 探索人工智能和物聯網概念 |
+| others | Others | 其他 | Explore games created by students | 探索由學生創作的遊戲 |
+
+Subject page: `{subject} Games`／`{subject}遊戲`; Explore interactive {subject} games and activities／探索互動{subject}遊戲和活動; Topic:／主題：; Form:／年級：; All／全部; Clear filters／清除篩選; Showing {count} of {total} games／顯示 {count} / {total} 個遊戲; No Games Yet／暫無遊戲; No Games Match Your Filters／沒有符合篩選條件的遊戲; Click to Play／點擊遊玩; Opens in new tab／在新分頁開啟; External／外部。 When there are no games, the empty state tells the developer to put HTML in `games/{subject}/`.
+
+Game page: Back to {subject}／返回{subject}; Subject／科目; Difficulty／難度; Estimated Time／預計時間; Author／作者; Loading game...／正在載入遊戲...; Open game／開啟遊戲; This game opens in a new tab.／此遊戲將在新分頁中開啟。
+
+Leaderboard: Leaderboard／排行榜; All time／所有時間; This year／本學年; Academic year／學年; Monthly／本月; All classes／所有班別; Loading scores...／正在載入分數...; this month, this academic year, and all time each have a line meaning 「暫無分數，成為第一個」; No scores from class {class} yet.／{class}班暫無分數; View complete leaderboard ({count})／查看完整排行榜 ({count}); Show top 10 only／只顯示前 10 名; Your best／你的最佳成績。 Under the title, say that only this device’s best scores are shown.
+
+Profile: Profile／個人檔案; Recent games／最近遊戲; No games played yet／暫未遊玩過任何遊戲; Browse games／瀏覽遊戲。 State that the records come from this device.
+
+---
+
+## 5. Page behaviour
+
+### 5.1 Home
+
+17 subject cards, in this fixed order: Chinese, English, Mathematics, Physics, Chemistry, Biology, Science, Geography, History, Chinese History, Economics, BAFS, Music, Physical Education, Tools, AIoT, Others. Each card links to `/subject/{id}` and shows the subject name and a short description. Below that is the three-step 「使用方式」 section. The layout must work on phones and desktops, with no horizontal overflow.
+
+### 5.2 Subject page
+
+Title and subtitle. When the subject has games, show filters: topic, year group, clear, and the count. Topics come from `topic`, deduplicated and sorted. Year groups come from `difficulty`. That field stores a year-group string such as `S1`, `P2`, or `S4 - S6`, not Easy／Medium／Hard.
+
+A game card shows title, description, topic, duration, year group, and author. Show a cover when one exists. Mark `leaderboard: true` as having a leaderboard. A game with `externalUrl` opens in a new tab and is labelled 「外部」. Show an empty state when there are no games, and a different empty state when filters match nothing.
+
+### 5.3 Game page
+
+The user can return to the subject and enter full screen. The page shows title, description, subject, difficulty, time, and author.
+
+Centre the game frame. It must not exceed the screen. While loading, show 「正在載入遊戲」. The iframe:
+
+- `src` is `/games/{subject}/{gameId}/index.html`
+- `sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"`
+- `allowFullScreen`
+- title is the game name
+
+Full screen: other browsers use the iframe’s native full screen. iOS and Safari use a fake full screen that fills the viewport, can be exited, and locks page scrolling. If the catalogue sets `touchSafe: true`, stop touch scrolling from interfering with the game.
+
+When leaving the game page, the parent sends `{ type: 'playlab:requestScore' }` to the iframe.
+
+Do not use an iframe for a game that has `externalUrl`. Show the description, an open link, and a way back.
+
+When `leaderboard: true`, show the leaderboard under the iframe. When `leaderboardMode: 'tracks'`, use a track leaderboard: the same game can rank separately by track and difficulty. Metadata is for display only and does not add another ranking rule.
+
+### 5.4 Profile
+
+Read records in localStorage whose score is greater than 0, newest first. State that these records belong to this device. Paginate the list, 10 rows per page: game name linking to the game page, subject, local time, and score. When there are no records, show an empty state and 「瀏覽遊戲」. Dates use the user’s local calendar day.
+
+---
+
+## 6. Catalogue, playback API, and on-device scores
+
+### 6.1 Catalogue data
+
+`GameProvider` uses one array as the catalogue. Do not build an admin backend. The array is empty except for one allowed test entry (see 6.4). Do not fill in real games.
+
+```ts
+{
+  id: string
+  title: string
+  titleZh?: string
+  description: string
+  descriptionZh?: string
+  subject: string
+  difficulty: string
+  estimatedTime: string
+  author?: string
+  thumbnail?: string
+  topic?: string
+  externalUrl?: string
+  leaderboard?: boolean
+  leaderboardMode?: 'default' | 'tracks'
+  scoreLabel?: string
+  touchSafe?: boolean
+}
+```
+
+The Chinese interface prefers `titleZh` and `descriptionZh`. Provide: all games, games by subject, one game lookup, the topic list for a subject, and the year-group list for a subject.
+
+### 6.2 Score messages
+
+If a game records a score, it posts to the parent:
+
+```js
+window.parent.postMessage({
+  type: 'playlab:score',
+  subject: '<subject>',
+  gameId: '<gameId>',
+  score: 1234,
+  metadata: {}
+}, '*');
+```
+
+Rules:
+
+- `score` must be a finite number. Higher is better. Do not store 0 or negative scores.
+- `subject` and `gameId` must match the current route.
+- Accept messages only from that iframe’s `contentWindow`.
+- For the same dedupe key, keep a score only when it is strictly higher. Use `__default__` when there is no special key. If metadata has `trackId`, the dedupe key is `trackId` plus `difficulty`.
+- The game should listen for `playlab:requestScore`, `pagehide`, and `beforeunload`. Do not treat switching tabs as the end of play.
+- Metadata is not used for ranking. It is only shown on the track leaderboard.
+
+The `localStorage` key `playlab-scores` is an append-only array. Each item has `id`, `subject`, `gameId`, `score`, `metadata`, and `createdAt`. Do not build a UI to delete or edit scores. All score writes go through one function.
+
+### 6.3 Leaderboard
+
+The user can switch among this academic year, all time, and this month. When this academic year is selected, the user can choose the year. Academic years use Hong Kong time, from 1 September to 31 August of the next year, listed from 2025–2026 through the current year. This month uses the user’s local month.
+
+Extract a class from the display name with `\b([1-6][A-Z])\b`, for example `5E`. If local records have no such name, do not show the class filter.
+
+Show the top 10 by default, with a way to expand all. Ties keep the earlier score first. If the user’s best score is not in the list, show an extra row at the bottom. Empty-state copy depends on the period and the class. Data comes only from this device.
+
+### 6.4 The only allowed test page
+
+To check the player page and the score API, you may add one placeholder with no learning content at `public/games/tools/score-check/index.html`. The screen shows only the platform name, a number, and two buttons: 「加 10 分」 and 「送出分數」. Sending posts the current number as specified in section 6.2. Register only this one catalogue entry, subject `tools`, `leaderboard: true`. Do not present it as a teaching game, and do not add a second game.
+
+---
+
+## 7. Build order
+
+1. Create the project, routes, bilingual dictionary, and an empty game catalogue.
+2. Finish the header, home, subject page, game page, full screen, on-device scores, leaderboard, and profile.
+3. Add only the score test page from section 6.4, and confirm that after a score is sent, the profile and that page’s leaderboard update.
+
+Do not create learning games. Do not build accounts or a backend.
+
+---
+
+## 8. Acceptance
+
+- All 17 subject cards are present. After switching language, a reload keeps that language.
+- A subject with no games shows an empty state. Filters with no matches show a different empty state.
+- At desktop and phone widths, home, subject, and game pages do not overflow horizontally. A touch device can enter and leave full screen.
+- After the score test page submits a score, the profile shows one record and the game page shows this device’s best score underneath. A lower score does not replace the best score. A higher score does.
+- Apart from that one score test page, `public/games` contains no other games.
+- The site has no specific school name, school email domain, or school badge.
+- `npm run build` succeeds.
