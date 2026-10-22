@@ -5,6 +5,7 @@ import {
   Gamepad2,
   Presentation,
   Music,
+  Notebook,
   Briefcase,
   ChevronDown,
   ChevronRight,
@@ -22,6 +23,7 @@ export type Page =
   | 'geminiMusic'
   | 'image'
   | 'app'
+  | 'geminiNotebook'
   | 'presentation'
   | 'qwen'
   | 'qwenWeb'
@@ -38,6 +40,7 @@ const geminiItems: {
   { id: 'image', icon: Image, labelKey: 'imageGen' },
   { id: 'geminiMusic', icon: Music, labelKey: 'geminiMusic' },
   { id: 'app', icon: Gamepad2, labelKey: 'appGame' },
+  { id: 'geminiNotebook', icon: Notebook, labelKey: 'geminiNotebook' },
   { id: 'presentation', icon: Presentation, labelKey: 'pptTab' },
 ];
 
@@ -52,7 +55,7 @@ const qwenItems: {
   { id: 'qwenSkill', icon: Wand2, labelKey: 'qwenSkill' },
 ];
 
-const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'geminiMusic', 'app', 'presentation'];
+const GEMINI_PAGES: Page[] = ['gemini', 'geminiGem', 'image', 'geminiMusic', 'app', 'geminiNotebook', 'presentation'];
 const QWEN_PAGES: Page[] = ['qwen', 'qwenWeb', 'qwenWorksheets', 'qwenMinutes', 'qwenSkill'];
 
 interface NavProps {
