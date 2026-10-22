@@ -5,6 +5,7 @@ import { GeminiTab } from './components/GeminiTab';
 import { ImageGenTab } from './components/ImageGenTab';
 import { GeminiMusicTab } from './components/GeminiMusicTab';
 import { AppGameTab } from './components/AppGameTab';
+import { GeminiNotebookTab } from './components/GeminiNotebookTab';
 import { PresentationTab } from './components/PresentationTab';
 import { QwenWorkTab } from './components/QwenWorkTab';
 import { QwenWebTab } from './components/QwenWebTab';
@@ -104,6 +105,7 @@ function App() {
             {activePage === 'image' && <ImageGenTab lang={lang} />}
             {activePage === 'geminiMusic' && <GeminiMusicTab lang={lang} />}
             {activePage === 'app' && <AppGameTab lang={lang} />}
+            {activePage === 'geminiNotebook' && <GeminiNotebookTab lang={lang} />}
             {activePage === 'presentation' && <PresentationTab lang={lang} />}
             {activePage === 'qwen' && (
               <QwenWorkTab
