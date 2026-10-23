@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MKPC 太鼓の達人 — MKPC Chemistry Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+TC:wght@700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0a0d13;
+      font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', 'Yu Gothic', 'Microsoft JhengHei', sans-serif;
+      -webkit-user-select: none;
+      user-select: none;
+      /* manipulation 才是 iOS 真正會拿掉「雙擊縮放」的值；none 在 Safari 上常常無效，連點的第二下會被吃掉。 */
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+      color: #fff;
+    }
+
+    #stage {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 0;
+      touch-action: manipulation;
+    }
+
+    #stage text {
+      font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', 'Yu Gothic', 'Microsoft JhengHei', sans-serif;
+      user-select: none;
+    }
+
+    #hitLayer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      background: rgba(0, 0, 0, 0.001);
+    }
+    #hitLayer.active { display: block; }
+
+    #subtitleOverlay {
+      position: fixed;
+      left: 0; right: 0;
+      top: 44%;
+      text-align: center;
+      font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
+      font-size: clamp(18px, 3.2vw, 32px);
+      font-weight: 900;
+      line-height: 1.35;
+      color: #fff;
+      text-shadow:
+        -2px -2px 0 #000, 2px -2px 0 #000,
+        -2px  2px 0 #000, 2px  2px 0 #000,
+        0 0 8px rgba(0,0,0,.6);
+      pointer-events: none;
+      z-index: 25;
+      opacity: 0;
+      transition: opacity 0.15s;
+      padding: 0 24px;
+    }
+    #subtitleOverlay.visible { opacity: 1; }
+
+    #bootError {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #ff9c8a;
+      background: #12161f;
+      z-index: 30;
+    }
+  </style>
+</head>
+
+<body>
+  <svg id="stage" viewBox="0 0 1280 820" preserveAspectRatio="xMidYMid meet"></svg>
+
+  <div id="hitLayer"></div>
+  <div id="subtitleOverlay"></div>
+  <div id="bootError"></div>
+
+  <script src="js/svg.js?v=25"></script>
+  <script src="js/audio.js?v=27"></script>
+  <script src="js/chartgen.js?v=25"></script>
+  <script src="js/tja.js?v=1"></script>
+  <script src="js/touchgate.js?v=25"></script>
+  <script src="js/game.js?v=26"></script>
+  <script src="js/screens.js?v=26"></script>
+  <script src="songs.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      function fatal(msg) {
+        var box = document.getElementById('bootError');
+        box.style.display = 'flex';
+        var prefix = (window.TKI18n && window.TKI18n.t) ? window.TKI18n.t('bootFail') : 'Failed to load game: ';
+        box.textContent = prefix + msg;
+      }
+
+      window.addEventListener('error', function (e) {
+        console.error('[taiko]', e.message, e.filename, e.lineno);
+      });
+
+      try {
+        var svg = document.getElementById('stage');
+        window.TKApp.init(svg);
+      } catch (err) {
+        console.error(err);
+        fatal(err && err.message ? err.message : String(err));
+      }
+
+      // 讓 iframe 取得鍵盤焦點
+      function grab() { try { window.focus(); } catch (e) { } }
+      window.addEventListener('pointerdown', grab);
+      grab();
+
+      // 首次互動時解鎖音訊
+      function unlock() {
+        window.TKAudio.resume();
+        window.removeEventListener('pointerdown', unlock);
+        window.removeEventListener('keydown', unlock);
+      }
+      window.addEventListener('pointerdown', unlock);
+      window.addEventListener('touchstart', unlock, { passive: true });
+      window.addEventListener('keydown', unlock);
+    })();
+  </script>
+</body>
+
+</html>

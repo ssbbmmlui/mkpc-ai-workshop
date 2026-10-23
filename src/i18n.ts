@@ -59,6 +59,12 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   geminiMusicLyricsOpen: { tc: '開啟歌詞 Gem', sc: '开启歌词 Gem', en: 'Open the lyrics Gem' },
   geminiMusicPromptTitle: { tc: '歌詞', sc: '歌词', en: 'Lyrics' },
   geminiMusicListenTitle: { tc: '試聽焰色試驗', sc: '试听焰色试验', en: 'Listen: flame test' },
+  geminiMusicGameTitle: { tc: '焰色試驗太鼓', sc: '焰色试验太鼓', en: 'Flame-test taiko' },
+  geminiMusicGameIntro: {
+    tc: '這首 AI 生成的歌曲可以放進教育遊戲。下面的太鼓只收錄焰色試驗：點進遊戲，跟著鼓點記住鈉、鉀、鈣、銅的焰色。',
+    sc: '这首 AI 生成的歌曲可以放进教育游戏。下面的太鼓只收录焰色试验：点进游戏，跟着鼓点记住钠、钾、钙、铜的焰色。',
+    en: 'This AI-generated song can become an educational game. The taiko game below includes only the flame test: open it and follow the drums to remember the flame colours of sodium, potassium, calcium, and copper.',
+  },
   appGame: { tc: 'App/遊戲生成', sc: 'App/游戏生成', en: 'App/Game Generation' },
   geminiNotebook: { tc: 'Gemini Notebook', sc: 'Gemini Notebook', en: 'Gemini Notebook' },
   geminiNotebookIntro: {
