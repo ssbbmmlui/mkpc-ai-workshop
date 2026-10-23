@@ -58,6 +58,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   geminiMusicLyricsOpen: { tc: '開啟歌詞 Gem', sc: '开启歌词 Gem', en: 'Open the lyrics Gem' },
   geminiMusicPromptTitle: { tc: '歌詞', sc: '歌词', en: 'Lyrics' },
+  geminiMusicListenTitle: { tc: '試聽焰色試驗', sc: '试听焰色试验', en: 'Listen: flame test' },
   appGame: { tc: 'App/遊戲生成', sc: 'App/游戏生成', en: 'App/Game Generation' },
   geminiNotebook: { tc: 'Gemini Notebook', sc: 'Gemini Notebook', en: 'Gemini Notebook' },
   geminiNotebookIntro: {

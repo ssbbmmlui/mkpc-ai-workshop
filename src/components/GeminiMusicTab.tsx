@@ -149,6 +149,15 @@ export function GeminiMusicTab({ lang }: Props) {
         <h3 className="section-title">{t('geminiMusicPromptTitle', lang)}</h3>
         <PromptBlock text={MUSIC_PROMPT} label={t('copyPrompt', lang)} maxHeight="480px" />
       </div>
+
+      <div>
+        <h3 className="section-title">{t('geminiMusicListenTitle', lang)}</h3>
+        <div className="step-card">
+          <audio controls preload="metadata" src={assetUrl('audio/flame-tests.mp3')} className="w-full">
+            {t('geminiMusicListenTitle', lang)}
+          </audio>
+        </div>
+      </div>
     </div>
   );
 }
