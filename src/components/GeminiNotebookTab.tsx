@@ -59,7 +59,7 @@ export function GeminiNotebookTab({ lang }: Props) {
             return (
               <figure key={step} className="step-card">
                 <img
-                  src={assetUrl(`images/gemini/notebook-${step}.png`)}
+                  src={assetUrl(`images/gemini/notebook-${step}.${step === 3 ? 'jpg' : 'png'}`)}
                   alt={caption}
                   className="h-auto w-full max-w-3xl rounded-lg border border-slate-200"
                 />
