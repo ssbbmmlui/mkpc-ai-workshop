@@ -158,6 +158,20 @@ export function GeminiMusicTab({ lang }: Props) {
           </audio>
         </div>
       </div>
+
+      <div>
+        <h3 className="section-title">{t('geminiMusicGameTitle', lang)}</h3>
+        <div className="step-card space-y-4">
+          <p className="leading-relaxed text-slate-600">{t('geminiMusicGameIntro', lang)}</p>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-[#0a0d13] shadow-sm">
+            <iframe
+              src={assetUrl('apps/taiko/index.html')}
+              title={t('geminiMusicGameTitle', lang)}
+              className="aspect-[1280/820] min-h-[560px] w-full border-0"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
