@@ -19,9 +19,11 @@ export const QWEN_WORKSHEETS_PROMPT_ZH = `請根據布魯姆分類學（Bloom’
 
 文件與符號規格
 - 文件格式必須前後一致：標題、科目、年級、課題、姓名欄、題號、分數、作答空間、間距與字型層級須統一；若有範本，嚴格跟範本，不要自行改版面。
+- 同一題（含題幹、附圖／附表及該題作答空間）必須完整出現在同一頁，不得在頁中間斷開或跨頁；若將超出頁末，應把整題移到下一頁，必要時微調間距，不可因此刪題或縮小至難以閱讀。
 - 所有數學與科學符號必須以可正常閱讀、可列印的方式呈現，使用 Word 方程式編輯器或等價的正式排版，包括但不限於：分數、指數、根號、上下標、方程式、單位、溫度、離子與化學式、電子排佈、箭號、平衡符號、希臘字母、向量、以及生物／物理常用標記。
-- 禁止使用亂碼、截圖公式，或 \`H_2O\`、\`x^2\`、\`1/2\`、\`sqrt\`、\`pi\`、\`->\`、\`CO2\` 這類純文字標記代替正式符號（正確應為 H₂O、x²、½ 或直式分數、π、→、CO₂ 等）。
-- 圖、表、實驗裝置或地圖若需作答，須完整保留標示，不要裁走必要部分。
+- 數學符號一律使用斜體（italic），例如變數、未知數與數學函數寫作 *x*、*y*、*n*、*f*(*x*)；上下標跟隨所屬符號。單位、阿拉伯數字、化學元素符號與化學式保持直立體（例如 3 cm、H₂O、CO₂、Na⁺），不要把單位或元素名稱做成斜體。
+- 禁止使用亂碼、截圖公式，或 \`H_2O\`、\`x^2\`、\`1/2\`、\`sqrt\`、\`pi\`、\`->\`、\`CO2\` 這類純文字標記代替正式符號（正確應為 H₂O、*x*²、½ 或直式分數、*π*、→、CO₂ 等）。
+- 圖、表、實驗裝置或地圖若需作答，須完整保留標示，並與所屬題目置於同一頁，不要裁走必要部分。
 - 用語使用繁體中文（書面語）；題幹為完整句子；數字、符號、單位與專有名詞格式全卷一致。
 
 限制
@@ -44,9 +46,11 @@ export const QWEN_WORKSHEETS_PROMPT_SC = `请根据布鲁姆分类学（Bloom’
 
 文件与符号规格
 - 文件格式必须前后一致：标题、科目、年级、课题、姓名栏、题号、分数、作答空间、间距与字型层级须统一；若有范本，严格跟范本，不要自行改版面。
+- 同一题（含题干、附图／附表及该题作答空间）必须完整出现在同一页，不得在页中间断开或跨页；若将超出页末，应把整题移到下一页，必要时微调间距，不可因此删题或缩小至难以阅读。
 - 所有数学与科学符号必须以可正常阅读、可列印的方式呈现，使用 Word 方程式编辑器或等价的正式排版，包括但不限于：分数、指数、根号、上下标、方程式、单位、温度、离子与化学式、电子排布、箭号、平衡符号、希腊字母、向量、以及生物／物理常用标记。
-- 禁止使用乱码、截图公式，或 \`H_2O\`、\`x^2\`、\`1/2\`、\`sqrt\`、\`pi\`、\`->\`、\`CO2\` 这类纯文字标记代替正式符号（正确应为 H₂O、x²、½ 或直式分数、π、→、CO₂ 等）。
-- 图、表、实验装置或地图若需作答，须完整保留标示，不要裁走必要部分。
+- 数学符号一律使用斜体（italic），例如变数、未知数与数学函数写作 *x*、*y*、*n*、*f*(*x*)；上下标跟随所属符号。单位、阿拉伯数字、化学元素符号与化学式保持直立体（例如 3 cm、H₂O、CO₂、Na⁺），不要把单位或元素名称做成斜体。
+- 禁止使用乱码、截图公式，或 \`H_2O\`、\`x^2\`、\`1/2\`、\`sqrt\`、\`pi\`、\`->\`、\`CO2\` 这类纯文字标记代替正式符号（正确应为 H₂O、*x*²、½ 或直式分数、*π*、→、CO₂ 等）。
+- 图、表、实验装置或地图若需作答，须完整保留标示，并与所属题目置于同一页，不要裁走必要部分。
 - 用语使用繁体中文（书面语）；题干为完整句子；数字、符号、单位与专有名词格式全卷一致。
 
 限制
@@ -69,9 +73,11 @@ For language, use vocabulary and short comprehension answers. For humanities and
 
 Document and symbol requirements
 - The document format must be consistent throughout: title, subject, year level, topic, name field, question numbers, marks, answer space, spacing, and type hierarchy must be uniform. If a template is provided, follow it strictly and do not redesign the layout.
+- A question (the stem, any figure or table, and that question’s answer space) must appear complete on the same page. Do not break it in the middle of a page or across pages. If it would run past the bottom of the page, move the whole question to the next page. Adjust the spacing if needed. Do not delete a question or shrink it until it is hard to read.
 - Every mathematics and science symbol must be readable and printable. Use the Word equation editor or equivalent formal typesetting, including but not limited to: fractions, exponents, roots, subscripts and superscripts, equations, units, temperature, ions and chemical formulas, electronic arrangements, arrows, equilibrium symbols, Greek letters, vectors, and notation commonly used in biology and physics.
-- Do not use garbled characters, screenshots of formulas, or plaintext markup such as \`H_2O\`, \`x^2\`, \`1/2\`, \`sqrt\`, \`pi\`, \`->\`, and \`CO2\` in place of formal symbols (the correct forms include H₂O, x², ½ or a stacked fraction, π, →, CO₂, and so on).
-- If a figure, table, apparatus diagram, or map is needed for answering, keep its labels complete. Do not crop away any part that is needed.
+- Set mathematical symbols in italic, for example variables, unknowns, and functions written as *x*, *y*, *n*, and *f*(*x*). Subscripts and superscripts follow their parent symbol. Keep units, Arabic numerals, chemical element symbols, and chemical formulas upright (for example 3 cm, H₂O, CO₂, and Na⁺). Do not italicize units or the names of elements.
+- Do not use garbled characters, screenshots of formulas, or plaintext markup such as \`H_2O\`, \`x^2\`, \`1/2\`, \`sqrt\`, \`pi\`, \`->\`, and \`CO2\` in place of formal symbols (the correct forms include H₂O, *x*², ½ or a stacked fraction, *π*, →, CO₂, and so on).
+- If a figure, table, apparatus diagram, or map is needed for answering, keep its labels complete and keep it on the same page as its question. Do not crop away any part that is needed.
 - Write in formal written Traditional Chinese. Each question stem must be a complete sentence. Keep numbers, symbols, units, and proper nouns in the same format throughout the paper.
 
 Constraints
