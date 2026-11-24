@@ -240,9 +240,9 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   qwenWorksheets: { tc: '分層功課／工作紙', sc: '分层功课／工作纸', en: 'Differentiated homework / worksheets' },
   qwenHomeworkTitle: { tc: '分層功課', sc: '分层功课', en: 'Differentiated homework' },
   qwenWorksheetsIntro: {
-    tc: '這段參考提示詞只生成一張「基礎程度」工作紙，依布魯姆分類學（Bloom’s Taxonomy）以記憶（Remember）與理解（Understand）為主，可有少量簡單應用（Apply）。請提供科目、年級、課題、課文或範本；適用語文、人文、歷史、數學及理科，並以繁體中文書面語寫成可列印的工作紙與獨立答案頁。',
-    sc: '这段参考提示词只生成一张「基础程度」工作纸，依布鲁姆分类学（Bloom’s Taxonomy）以记忆（Remember）与理解（Understand）为主，可有少量简单应用（Apply）。请提供科目、年级、课题、课文或范本；适用语文、人文、历史、数学及理科，并以繁体中文书面语写成可列印的工作纸与独立答案页。',
-    en: 'This reference prompt creates one basic-level worksheet. It follows Bloom’s Taxonomy, mainly Remember and Understand, with a little simple Apply. Give the subject, year level, topic, and any text or template. It covers language, humanities, history, mathematics, and science, and the worksheet is written in formal Traditional Chinese, ready to print, with a separate answer page.',
+    tc: '這節有兩段參考提示詞，各生成一張可列印的工作紙與獨立答案頁。基礎程度以記憶（Remember）與理解（Understand）為主，可有少量簡單應用（Apply）；進階程度以應用（Apply）與分析（Analyse）為主，可有少量評鑑（Evaluate）。請提供科目、年級、課題、課文或範本；適用語文、人文、歷史、數學及理科，並以繁體中文書面語寫成。',
+    sc: '这节有两段参考提示词，各生成一张可列印的工作纸与独立答案页。基础程度以记忆（Remember）与理解（Understand）为主，可有少量简单应用（Apply）；进阶程度以应用（Apply）与分析（Analyse）为主，可有少量评鉴（Evaluate）。请提供科目、年级、课题、课文或范本；适用语文、人文、历史、数学及理科，并以繁体中文书面语写成。',
+    en: 'This section has two reference prompts. Each one creates a printable worksheet with a separate answer page. Basic level focuses on Remember and Understand, with a little simple Apply. Advanced level focuses on Apply and Analyse, with a little Evaluate. Give the subject, year level, topic, and any text or template. Both cover language, humanities, history, mathematics, and science, and the worksheets are written in formal Traditional Chinese.',
   },
   qwenWorksheetsStepsTitle: { tc: '分層功課步驟', sc: '分层功课步骤', en: 'Differentiated homework steps' },
   qwenWorksheetsStep1: { tc: '開啟 Qwen Work', sc: '开启 Qwen Work', en: 'Open Qwen Work' },
@@ -252,12 +252,13 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     en: 'Give the subject, year level, and topic, and attach a text or template. If you do not have your own files, download the samples on this page first',
   },
   qwenWorksheetsStep3: {
-    tc: '貼上基礎程度參考提示詞，等待生成可列印的工作紙及答案頁',
-    sc: '贴上基础程度参考提示词，等待生成可列印的工作纸及答案页',
-    en: 'Paste the basic-level reference prompt and wait for a printable worksheet and answer page',
+    tc: '貼上基礎程度或進階程度參考提示詞，等待生成可列印的工作紙及答案頁',
+    sc: '贴上基础程度或进阶程度参考提示词，等待生成可列印的工作纸及答案页',
+    en: 'Paste the basic-level or advanced-level reference prompt and wait for a printable worksheet and answer page',
   },
   qwenWorksheetsPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
   qwenHomeworkPromptTitle: { tc: '基礎程度參考提示詞', sc: '基础程度参考提示词', en: 'Basic-level reference prompt' },
+  qwenHomeworkAdvancedPromptTitle: { tc: '進階程度參考提示詞', sc: '进阶程度参考提示词', en: 'Advanced-level reference prompt' },
   qwenWorksheetsFilesTitle: { tc: '參考檔案（供沒有教材時使用）', sc: '参考档案（供没有教材时使用）', en: 'Sample files (if you do not have your own)' },
   qwenWorksheetsFilesIntro: {
     tc: '沒有自己的課文或範本時，可下載以下檔案再上載。提示詞會按你提供的科目、年級、課題與附件出題；若有範本，須跟範本，不要改版面。',
@@ -268,9 +269,9 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   qwenWorksheetsFileTextbook: { tc: '教科書（.pdf）', sc: '教科书（.pdf）', en: 'Textbook (.pdf)' },
   qwenWorksheetsSampleAlt: { tc: 'Qwen Work 分層功課效果示例', sc: 'Qwen Work 分层功课效果示例', en: 'Qwen Work differentiated homework sample' },
   qwenWorksheetsSampleNote: {
-    tc: '此圖為較早示例，畫面中亦有進階卷；現時這段參考提示詞只生成基礎程度工作紙。',
-    sc: '此图为较早示例，画面中亦有进阶卷；现时这段参考提示词只生成基础程度工作纸。',
-    en: 'This screenshot is from an earlier example and also shows an advanced paper. The reference prompt now generates only a basic-level worksheet.',
+    tc: '此圖為較早示例。現時基礎程度與進階程度各有一段參考提示詞，各生成一張工作紙。',
+    sc: '此图为较早示例。现时基础程度与进阶程度各有一段参考提示词，各生成一张工作纸。',
+    en: 'This screenshot is from an earlier example. There is now a separate reference prompt for a basic-level worksheet and one for an advanced-level worksheet.',
   },
   qwenTieredWsTitle: { tc: '分層工作紙', sc: '分层工作纸', en: 'Differentiated worksheets' },
   qwenTieredWsIntro: {
