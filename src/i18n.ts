@@ -249,7 +249,7 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   qwenWorksheetsStep2: {
     tc: '提供科目、年級、課題，並上載課文或範本；沒有自己的教材時，可先下載本頁檔案再上載',
     sc: '提供科目、年级、课题，并上传课文或范本；没有自己的教材时，可先下载本页档案再上传',
-    en: 'Give the subject, year level, and topic, and attach a text or template. If you do not have your own files, download the samples on this page first',
+    en: 'Give the subject, year level, and topic, and attach a text or template. If you do not have your own files, download the file on this page first',
   },
   qwenWorksheetsStep3: {
     tc: '貼上基礎程度或進階程度參考提示詞，等待生成可列印的工作紙及答案頁',
@@ -258,19 +258,26 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   qwenHomeworkPromptTitle: { tc: '基礎程度參考提示詞', sc: '基础程度参考提示词', en: 'Basic-level reference prompt' },
   qwenHomeworkAdvancedPromptTitle: { tc: '進階程度參考提示詞', sc: '进阶程度参考提示词', en: 'Advanced-level reference prompt' },
-  qwenWorksheetsFilesTitle: { tc: '參考檔案（供沒有教材時使用）', sc: '参考档案（供没有教材时使用）', en: 'Sample files (if you do not have your own)' },
+  qwenWorksheetsFilesTitle: { tc: '參考檔案（供沒有教材時使用）', sc: '参考档案（供没有教材时使用）', en: 'Sample file (if you do not have your own)' },
   qwenWorksheetsFilesIntro: {
     tc: '沒有自己的課文或範本時，可下載以下檔案再上載。提示詞會按你提供的科目、年級、課題與附件出題；若有範本，須跟範本，不要改版面。',
     sc: '没有自己的课文或范本时，可下载以下档案再上传。提示词会按你提供的科目、年级、课题与附件出题；若有范本，须跟范本，不要改版面。',
-    en: 'If you do not have a text or template, download the files below and upload them. The prompt follows the subject, year level, topic, and files you provide, and it keeps the template layout when one is attached.',
+    en: 'If you do not have a text or template, download the file below and upload it. The prompt follows the subject, year level, topic, and file you provide, and it keeps the template layout when one is attached.',
   },
-  qwenWorksheetsFileNormal: { tc: '普通程度功課（.docx）', sc: '普通程度功课（.docx）', en: 'Normal-level homework (.docx)' },
-  qwenWorksheetsFileTextbook: { tc: '教科書（.pdf）', sc: '教科书（.pdf）', en: 'Textbook (.pdf)' },
-  qwenWorksheetsSampleAlt: { tc: 'Qwen Work 分層功課效果示例', sc: 'Qwen Work 分层功课效果示例', en: 'Qwen Work differentiated homework sample' },
+  qwenWorksheetsFileWorksheet: {
+    tc: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
+    sc: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
+    en: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
+  },
+  qwenWorksheetsSampleAlt: {
+    tc: 'Qwen Work 生成布魯姆進階工作紙，Word 預覽課堂工作紙 3.4（進階程度）',
+    sc: 'Qwen Work 生成布鲁姆进阶工作纸，Word 预览课堂工作纸 3.4（进阶程度）',
+    en: 'Qwen Work generating an advanced Bloom worksheet, with Word previewing 課堂工作紙 3.4（進階程度）',
+  },
   qwenWorksheetsSampleNote: {
-    tc: '此圖為較早示例。現時基礎程度與進階程度各有一段參考提示詞，各生成一張工作紙。',
-    sc: '此图为较早示例。现时基础程度与进阶程度各有一段参考提示词，各生成一张工作纸。',
-    en: 'This screenshot is from an earlier example. There is now a separate reference prompt for a basic-level worksheet and one for an advanced-level worksheet.',
+    tc: '此圖為進階程度示例：Qwen Work 生成「布魯姆進階工作紙」，Word 預覽「課堂工作紙 3.4（進階程度）」。',
+    sc: '此图为进阶程度示例：Qwen Work 生成「布鲁姆进阶工作纸」，Word 预览「课堂工作纸 3.4（进阶程度）」。',
+    en: 'This screenshot is the advanced-level example: Qwen Work generates 「布魯姆進階工作紙」, and Word previews 「課堂工作紙 3.4（進階程度）」.',
   },
   qwenMinutes: { tc: '會議記錄／文件', sc: '会议记录／文件', en: 'Meeting minutes / documents' },
   qwenMinutesIntro: {
