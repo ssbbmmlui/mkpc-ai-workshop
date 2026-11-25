@@ -200,7 +200,7 @@ function FileButton({ label, onClick }: { label: string; onClick: () => void }) 
   );
 }
 
-const ADVANCED_WORKSHEET_FILE = '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc';
+const ADVANCED_WORKSHEET_FILE = '21_MIF2nd_S3A_ws03.4_Set1_c.doc';
 
 interface Props {
   lang: Lang;
