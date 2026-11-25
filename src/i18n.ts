@@ -237,8 +237,8 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
   },
   qwenWebFileBubbles: { tc: 'Ionic Bubbles 離子泡泡', sc: 'Ionic Bubbles 离子泡泡', en: 'Ionic Bubbles' },
   qwenWebFileSnake: { tc: 'Math Snake 數學貪食蛇', sc: 'Math Snake 数学贪食蛇', en: 'Math Snake' },
-  qwenWorksheets: { tc: '分層功課／工作紙', sc: '分层功课／工作纸', en: 'Differentiated homework / worksheets' },
-  qwenHomeworkTitle: { tc: '分層功課', sc: '分层功课', en: 'Differentiated homework' },
+  qwenWorksheets: { tc: '分層功課/工作紙', sc: '分层功课/工作纸', en: 'Differentiated homework / worksheets' },
+  qwenHomeworkTitle: { tc: '分層功課/工作紙', sc: '分层功课/工作纸', en: 'Differentiated homework / worksheets' },
   qwenWorksheetsIntro: {
     tc: '這節有兩段參考提示詞，各生成一張可列印的工作紙與獨立答案頁。基礎程度以記憶（Remember）與理解（Understand）為主，可有少量簡單應用（Apply）；進階程度以應用（Apply）與分析（Analyse）為主，可有少量評鑑（Evaluate）。請提供科目、年級、課題、課文或範本；適用語文、人文、歷史、數學及理科，並以繁體中文書面語寫成。',
     sc: '这节有两段参考提示词，各生成一张可列印的工作纸与独立答案页。基础程度以记忆（Remember）与理解（Understand）为主，可有少量简单应用（Apply）；进阶程度以应用（Apply）与分析（Analyse）为主，可有少量评鉴（Evaluate）。请提供科目、年级、课题、课文或范本；适用语文、人文、历史、数学及理科，并以繁体中文书面语写成。',
@@ -256,7 +256,6 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     sc: '贴上基础程度或进阶程度参考提示词，等待生成可列印的工作纸及答案页',
     en: 'Paste the basic-level or advanced-level reference prompt and wait for a printable worksheet and answer page',
   },
-  qwenWorksheetsPromptTitle: { tc: '參考提示詞', sc: '参考提示词', en: 'Reference prompt' },
   qwenHomeworkPromptTitle: { tc: '基礎程度參考提示詞', sc: '基础程度参考提示词', en: 'Basic-level reference prompt' },
   qwenHomeworkAdvancedPromptTitle: { tc: '進階程度參考提示詞', sc: '进阶程度参考提示词', en: 'Advanced-level reference prompt' },
   qwenWorksheetsFilesTitle: { tc: '參考檔案（供沒有教材時使用）', sc: '参考档案（供没有教材时使用）', en: 'Sample files (if you do not have your own)' },
@@ -272,43 +271,6 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     tc: '此圖為較早示例。現時基礎程度與進階程度各有一段參考提示詞，各生成一張工作紙。',
     sc: '此图为较早示例。现时基础程度与进阶程度各有一段参考提示词，各生成一张工作纸。',
     en: 'This screenshot is from an earlier example. There is now a separate reference prompt for a basic-level worksheet and one for an advanced-level worksheet.',
-  },
-  qwenTieredWsTitle: { tc: '分層工作紙', sc: '分层工作纸', en: 'Differentiated worksheets' },
-  qwenTieredWsIntro: {
-    tc: '把參考工作紙模版與教科書上載到 Qwen Work，再貼上提示詞，即可生成不同層次題目工作紙，版式會對齊原有工作紙與課本內容。',
-    sc: '把参考工作纸模板与教科书上传到 Qwen Work，再贴上提示词，即可生成不同层次题目工作纸，版式会对齐原有工作纸与课本内容。',
-    en: 'Upload the worksheet template and textbook to Qwen Work, then paste the prompt to generate worksheets at different levels. The layout follows the original worksheet and the textbook.',
-  },
-  qwenTieredWsStepsTitle: { tc: '分層工作紙步驟', sc: '分层工作纸步骤', en: 'Differentiated worksheet steps' },
-  qwenTieredWsStep2: {
-    tc: '上載工作紙模版與教科書；沒有自己的教材時，可先下載本頁提供的檔案再上載',
-    sc: '上传工作纸模板与教科书；没有自己的教材时，可先下载本页提供的档案再上传',
-    en: 'Upload the worksheet template and textbook. If you do not have your own materials, download the files on this page first',
-  },
-  qwenTieredWsStep3: {
-    tc: '貼上參考提示詞，等待生成工作紙及答案',
-    sc: '贴上参考提示词，等待生成工作纸及答案',
-    en: 'Paste the reference prompt and wait for the worksheets and answers',
-  },
-  qwenTieredWsFilesIntro: {
-    tc: '提示詞結尾的 @worksheet template.docx 須與上載檔名一致。可下載工作紙模版與教科書，再上載到 Qwen Work。',
-    sc: '提示词结尾的 @worksheet template.docx 须与上传档名一致。可下载工作纸模板与教科书，再上传到 Qwen Work。',
-    en: 'The @worksheet template.docx name at the end of the prompt must match the file you attach. Download the template and textbook, then upload them to Qwen Work.',
-  },
-  qwenTieredWsFileTemplate: {
-    tc: '工作紙模版（worksheet template.docx）',
-    sc: '工作纸模板（worksheet template.docx）',
-    en: 'Worksheet template (worksheet template.docx)',
-  },
-  qwenTieredWsFileTextbook: {
-    tc: '教科書（Strength of acids and alkalis.pdf）',
-    sc: '教科书（Strength of acids and alkalis.pdf）',
-    en: 'Textbook (Strength of acids and alkalis.pdf)',
-  },
-  qwenTieredWsSampleAlt: {
-    tc: 'Qwen Work 生成三層工作紙及評分準則的效果示例',
-    sc: 'Qwen Work 生成三层工作纸及评分准则的效果示例',
-    en: 'Qwen Work sample of three worksheet levels and their marking schemes',
   },
   qwenMinutes: { tc: '會議記錄／文件', sc: '会议记录／文件', en: 'Meeting minutes / documents' },
   qwenMinutesIntro: {
