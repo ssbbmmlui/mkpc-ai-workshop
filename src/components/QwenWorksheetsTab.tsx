@@ -200,6 +200,8 @@ function FileButton({ label, onClick }: { label: string; onClick: () => void }) 
   );
 }
 
+const ADVANCED_WORKSHEET_FILE = '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc';
+
 interface Props {
   lang: Lang;
 }
@@ -252,18 +254,12 @@ export function QwenWorksheetsTab({ lang }: Props) {
           <p className="text-sm leading-relaxed text-slate-600">{t('qwenWorksheetsFilesIntro', lang)}</p>
           <div className="flex flex-wrap gap-3">
             <FileButton
-              label={t('qwenWorksheetsFileNormal', lang)}
+              label={t('qwenWorksheetsFileWorksheet', lang)}
               onClick={() =>
                 blobDownload(
-                  encodeURI(assetUrl('files/qwen-work/12 Reacting masses_Homework_Student.docx')),
-                  '12 Reacting masses_Homework_Student.docx',
+                  encodeURI(assetUrl(`files/qwen-work/${ADVANCED_WORKSHEET_FILE}`)),
+                  ADVANCED_WORKSHEET_FILE,
                 )
-              }
-            />
-            <FileButton
-              label={t('qwenWorksheetsFileTextbook', lang)}
-              onClick={() =>
-                blobDownload(assetUrl('files/qwen-work/cbte12_e_cleaned.pdf'), 'cbte12_e_cleaned.pdf')
               }
             />
           </div>
@@ -285,7 +281,7 @@ export function QwenWorksheetsTab({ lang }: Props) {
         <p className="mb-3 text-sm leading-relaxed text-slate-600">{t('qwenWorksheetsSampleNote', lang)}</p>
         <div className="step-card overflow-hidden p-0">
           <img
-            src={assetUrl('images/qwen-work/differentiated-worksheets.png')}
+            src={assetUrl('images/qwen-work/advanced-level-worksheet.png')}
             alt={t('qwenWorksheetsSampleAlt', lang)}
             className="h-auto w-full max-w-full"
           />
