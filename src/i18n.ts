@@ -265,9 +265,9 @@ const translations: Record<string, { tc: string; sc: string; en: string }> = {
     en: 'If you do not have a text or template, download the file below and upload it. The prompt follows the subject, year level, topic, and file you provide, and it keeps the template layout when one is attached.',
   },
   qwenWorksheetsFileWorksheet: {
-    tc: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
-    sc: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
-    en: '中三數學_3A冊_3.4複利息_工作紙(進階程度).doc',
+    tc: '21_MIF2nd_S3A_ws03.4_Set1_c.doc',
+    sc: '21_MIF2nd_S3A_ws03.4_Set1_c.doc',
+    en: '21_MIF2nd_S3A_ws03.4_Set1_c.doc',
   },
   qwenWorksheetsSampleAlt: {
     tc: 'Qwen Work 生成布魯姆進階工作紙，Word 預覽課堂工作紙 3.4（進階程度）',
